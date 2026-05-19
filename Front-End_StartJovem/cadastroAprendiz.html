@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Aprendiz</title>
+    
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="stylesheet" href="assets/css/cadastro.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="page-background">
+        <div class="card-container">
+            
+            <div class="left-panel">
+                <div class="welcome-text">
+                    <h1>Welcome</h1>
+                    <p>Criar sua conta é rápido, seguro e sem burocracia. Preencha os dados ao lado e desbloqueie agora o seu acesso à nossa plataforma.</p>
+                </div>
+                
+                <div class="login-section">
+                    <p>Já tem uma conta?</p>
+                    <button class="btn-outline" href="login.html">ENTRAR</button>
+                </div>
+
+                <div class="footer-brand">
+                    TECNOLOGIA E INOVAÇÃO
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <h2>Cadastre-se como <strong>APRENDIZ</strong></h2>
+                
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" placeholder="Nome Sobrenome" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha">Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="senha" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmar-senha">Confirmar Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="confirmar-senha" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Criar Conta</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="assets/js/auth/cadastro.js"></script>
+</body>
+</html>

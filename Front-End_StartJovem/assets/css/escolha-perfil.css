@@ -1,0 +1,181 @@
+/* Container Principal com o mesmo background da página de cadastro */
+.page-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+    /* AQUI ESTÁ A ALTERAÇÃO: Trocando a cor pelo caminho da imagem geométrica */
+    background-image: url('../img/backgrounds/backgrounds.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+/* Títulos */
+.header-titles {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header-titles h1 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.header-titles .highlight-blue {
+    color: #007bff; /* Azul claro do texto */
+}
+
+.header-titles p {
+    color: #a0a5aa;
+    font-size: 1.2rem;
+}
+
+/* Layout dos Cartões */
+.cards-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+}
+
+/* Cartão Padrão */
+.profile-card {
+    background-color: #1b223d; /* Azul marinho escuro */
+    border-radius: 12px;
+    padding: 40px 30px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.profile-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-wrapper {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.profile-card p {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+}
+
+/* Cartão Aprendiz (Azul) */
+.card-aprendiz {
+    border: 2px solid #0056ff;
+}
+.card-aprendiz .icon-wrapper {
+    color: #00a8ff;
+}
+.title-aprendiz {
+    color: #00a8ff;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+/* Cartão Gestor (Roxo) */
+.card-gestor {
+    border: 2px solid #6b2f7a;
+}
+.card-gestor .icon-wrapper {
+    color: #9b59b6;
+}
+.title-gestor {
+    color: #9b59b6;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+/* Botões */
+.btn {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 0;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    transition: filter 0.3s ease;
+}
+
+.btn:hover {
+    filter: brightness(1.1);
+}
+
+.btn-blue {
+    background-color: #006ce4;
+}
+
+.btn-purple {
+    background-color: #833e94;
+}
+
+/* Divisor Vertical */
+.divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    gap: 15px;
+}
+
+.divider .line {
+    width: 1px;
+    height: 40px;
+    background-color: #666;
+}
+
+/* Rodapé de Login */
+.footer-login {
+    margin-top: 40px;
+    color: #cccccc;
+    font-size: 1rem;
+}
+
+.footer-login a {
+    color: #7aa1c7;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+    }
+    .divider {
+        flex-direction: row;
+    }
+    .divider .line {
+        width: 40px;
+        height: 1px;
+    }
+}
