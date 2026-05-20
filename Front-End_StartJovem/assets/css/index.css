@@ -1,0 +1,123 @@
+/* Container Principal (Mesmo background geométrico) */
+.page-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('../img/backgrounds/backgrounds.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Layout que divide a tela em duas partes (Marca na esquerda, Cartão na direita) */
+.welcome-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    height: 550px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Lado Esquerdo */
+.left-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.brand-text {
+    color: #e0e0e0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+/* Lado Direito */
+.right-content {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Estilo do Cartão Escuro com leve transparência e borda fina */
+.glass-card {
+    background: rgba(30, 30, 30, 0.6); /* Fundo escuro levemente transparente */
+    backdrop-filter: blur(8px); /* Efeito de vidro */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Borda fina igual à imagem */
+    border-radius: 12px;
+    padding: 60px 40px;
+    width: 100%;
+    max-width: 360px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    position: relative; /* Necessário para posicionar o copyright no final */
+}
+
+/* Textos do Cartão */
+.welcome-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    line-height: 1.3;
+}
+
+.subtitle {
+    color: #e0e0e0;
+    font-size: 1rem;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Botão Azul */
+.btn-start {
+    background-color: #0b5ed7; /* Azul forte semelhante à referência */
+    color: #ffffff;
+    border: 1px solid #0a58ca;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 25px;
+}
+
+.btn-start:hover {
+    background-color: #0a58ca;
+}
+
+/* Rodapé do Cartão */
+.copyright {
+    position: absolute;
+    bottom: 20px;
+    color: #a0a5aa;
+    font-size: 0.6rem;
+    letter-spacing: 0.5px;
+}
+
+/* Responsividade Básica */
+@media (max-width: 768px) {
+    .welcome-container {
+        flex-direction: column;
+        justify-content: center;
+        gap: 50px;
+        height: auto;
+    }
+    .right-content {
+        justify-content: center;
+        width: 100%;
+    }
+    .brand-text {
+        text-align: center;
+    }
+}
