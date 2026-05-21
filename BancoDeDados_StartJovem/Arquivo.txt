@@ -1,1 +1,1 @@
-Apenas para conteúdo
+Banco de dados adicionado e com a maioria das tabelas criadas.

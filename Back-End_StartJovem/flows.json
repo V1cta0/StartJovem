@@ -1,0 +1,444 @@
+[
+    {
+        "id": "48a2a193d2a3bd81",
+        "type": "tab",
+        "label": "Sistema Aprendiz",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3fd417d48026653b",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Cadastro Aprendiz",
+        "url": "/cadastro-aprendiz",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "8bd2ab4167c9f827"
+            ]
+        ]
+    },
+    {
+        "id": "8bd2ab4167c9f827",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Aprendiz",
+        "func": "const { nome, email, senha } = msg.payload;\n\nmsg.topic = `INSERT INTO usuarios(nome,email,senha,tipo) VALUES (?,?,?,'aprendiz')`;\nmsg.payload = [nome, email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "6cc2996c91b465bf"
+            ]
+        ]
+    },
+    {
+        "id": "6cc2996c91b465bf",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 80,
+        "wires": [
+            [
+                "8c588e65da6272e6"
+            ]
+        ]
+    },
+    {
+        "id": "8c588e65da6272e6",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Aprendiz cadastrado com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 860,
+        "y": 80,
+        "wires": [
+            [
+                "878207d0fb4b7f8a"
+            ]
+        ]
+    },
+    {
+        "id": "878207d0fb4b7f8a",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1060,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a84d0f3676684ffe",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Cadastro Monitor",
+        "url": "/cadastro-monitor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "6ef5b3e116cd63b0"
+            ]
+        ]
+    },
+    {
+        "id": "6ef5b3e116cd63b0",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Monitor",
+        "func": "const { nome, email, senha } = msg.payload;\n\nmsg.topic = `INSERT INTO usuarios(nome,email,senha,tipo) VALUES (?,?,?,'monitor')`;\nmsg.payload = [nome, email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 180,
+        "wires": [
+            [
+                "0efd52ebecde8792"
+            ]
+        ]
+    },
+    {
+        "id": "0efd52ebecde8792",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "7f1b22cf73f67e05"
+            ]
+        ]
+    },
+    {
+        "id": "7f1b22cf73f67e05",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Monitor cadastrado com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 860,
+        "y": 180,
+        "wires": [
+            [
+                "131bb19c79981b8f"
+            ]
+        ]
+    },
+    {
+        "id": "131bb19c79981b8f",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1060,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "613e4514e68ef3b9",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Cadastro Gestor",
+        "url": "/cadastro-gestor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "17a0b3082fa525c6"
+            ]
+        ]
+    },
+    {
+        "id": "17a0b3082fa525c6",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Gestor",
+        "func": "const { nome, email, senha } = msg.payload;\n\nmsg.topic = `INSERT INTO usuarios(nome,email,senha,tipo) VALUES (?,?,?,'gestor')`;\nmsg.payload = [nome, email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "09ed01a712df41ca"
+            ]
+        ]
+    },
+    {
+        "id": "09ed01a712df41ca",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 280,
+        "wires": [
+            [
+                "ac412b0c6bf33dce"
+            ]
+        ]
+    },
+    {
+        "id": "ac412b0c6bf33dce",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Gestor cadastrado com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 860,
+        "y": 280,
+        "wires": [
+            [
+                "a872652d20f73991"
+            ]
+        ]
+    },
+    {
+        "id": "a872652d20f73991",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1060,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b8988e62c5060491",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Login",
+        "url": "/login",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "01d0345cc1d4746e"
+            ]
+        ]
+    },
+    {
+        "id": "01d0345cc1d4746e",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "SELECT Login",
+        "func": "const { email, senha } = msg.payload;\n\nmsg.topic = `SELECT * FROM usuarios WHERE email = ? AND senha = ?`;\nmsg.payload = [email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "91614723b86871d2"
+            ]
+        ]
+    },
+    {
+        "id": "91614723b86871d2",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 640,
+        "y": 400,
+        "wires": [
+            [
+                "f2e75638405710a2"
+            ]
+        ]
+    },
+    {
+        "id": "f2e75638405710a2",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Validar Login",
+        "func": "if(msg.payload.length > 0){\n    msg.payload = {\n        sucesso:true,\n        usuario:msg.payload[0]\n    }\n}else{\n    msg.payload = {\n        sucesso:false,\n        mensagem:'Email ou senha inválidos'\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 870,
+        "y": 400,
+        "wires": [
+            [
+                "1e88f2eea7248405"
+            ]
+        ]
+    },
+    {
+        "id": "1e88f2eea7248405",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1eededb6e5c0763d",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Criar Turma",
+        "url": "/criar-turma",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [
+                "0f9e08bad6705b30"
+            ]
+        ]
+    },
+    {
+        "id": "0f9e08bad6705b30",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Turma",
+        "func": "const { nome, descricao } = msg.payload;\n\nmsg.topic = `INSERT INTO turmas(nome,descricao) VALUES (?,?)`;\nmsg.payload = [nome, descricao];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 420,
+        "y": 520,
+        "wires": [
+            [
+                "20275ca816ba7027"
+            ]
+        ]
+    },
+    {
+        "id": "20275ca816ba7027",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 520,
+        "wires": [
+            [
+                "31559313f13ca6d9"
+            ]
+        ]
+    },
+    {
+        "id": "31559313f13ca6d9",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Turma criada com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 860,
+        "y": 520,
+        "wires": [
+            [
+                "1c46154f1882d343"
+            ]
+        ]
+    },
+    {
+        "id": "1c46154f1882d343",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1070,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "855d915629c18594",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Listar Turmas",
+        "url": "/listar-turmas",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 640,
+        "wires": [
+            [
+                "ab19aea0b317500f"
+            ]
+        ]
+    },
+    {
+        "id": "ab19aea0b317500f",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "SELECT Turmas",
+        "func": "msg.topic = `SELECT * FROM turmas ORDER BY id DESC`;\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 640,
+        "wires": [
+            [
+                "9f66c0d27576d034"
+            ]
+        ]
+    },
+    {
+        "id": "9f66c0d27576d034",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 660,
+        "y": 640,
+        "wires": [
+            [
+                "7623d7110b6a0a4a"
+            ]
+        ]
+    },
+    {
+        "id": "7623d7110b6a0a4a",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "mysql_config",
+        "type": "MySQLdatabase",
+        "name": "StartJovem",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "StartJovem",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "377e82a272095d21",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]
