@@ -238,3 +238,65 @@
         margin-top: 50px; 
     }
 }
+.usuario-box{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    color:#fff;
+}
+
+.usuario-box h2{
+    font-size:1.2rem;
+}
+
+.usuario-box span{
+    color:#a0a5aa;
+    font-size:.9rem;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    transition:.3s;
+}
+
+.kanban-item{
+    cursor:pointer;
+    transition:.3s;
+}
+
+.kanban-item:hover{
+    background:#7b8196;
+}
+
+.chart-card canvas{
+    width:100% !important;
+    height:280px !important;
+}
+
+.info-card{
+    min-height:130px;
+    justify-content:center;
+}
+
+.sidebar{
+    min-height:95vh;
+}
+
+.notification-bell:hover{
+    color:#fff;
+    transition:.3s;
+}
+
+.search-bar{
+    width:100%;
+}
+
+.search-bar input{
+    width:100%;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}

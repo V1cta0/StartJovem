@@ -1,21 +1,55 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // Captura o formulário pelo ID
+
     const loginGestorForm = document.getElementById('loginGestorForm');
 
-    if (loginGestorForm) {
-        loginGestorForm.addEventListener('submit', function(event) {
-            // Oculta o recarregamento padrão da página
+    if(loginGestorForm){
+
+        loginGestorForm.addEventListener('submit', async function(event){
+
             event.preventDefault();
-            
-            // Alerta opcional para confirmar a ação antes de mudar de tela
-            alert('Login de Gestor efetuado com sucesso!');
-            
-            // Força o redirecionamento para o monitoramento
-            window.location.assign('monitoramento.html');
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            try{
+
+                const response = await fetch('http://localhost:1880/login-gestor', {
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body: JSON.stringify({
+                        email,
+                        senha
+                    })
+                });
+
+                const data = await response.json();
+
+                if(data.sucesso){
+
+                    localStorage.setItem('gestor', JSON.stringify(data.usuario));
+
+                    alert(data.mensagem);
+
+                    window.location.href = 'monitoramento.html';
+
+                }else{
+
+                    alert(data.mensagem);
+
+                }
+
+            }catch(error){
+
+                console.error(error);
+
+                alert('Erro ao realizar login.');
+
+            }
+
         });
-    } else {
-        console.error("Erro: O formulário com ID 'loginGestorForm' não foi encontrado nesta página.");
+
     }
 
 });

@@ -55,4 +55,87 @@ CREATE TABLE monitoramentos (
     FOREIGN KEY (aprendiz_id) REFERENCES usuarios(id)
 );
 
+CREATE TABLE gestao_aprendiz (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    aprendiz_id INT NOT NULL,
+    turma_id INT NOT NULL,
+    monitor_id INT,
+
+    desempenho ENUM(
+        'excelente',
+        'bom',
+        'regular',
+        'critico'
+    ) DEFAULT 'bom',
+
+    frequencia INT DEFAULT 100,
+
+    status_aprendiz ENUM(
+        'ativo',
+        'atencao',
+        'desligado'
+    ) DEFAULT 'ativo',
+
+    observacoes TEXT,
+
+    atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (aprendiz_id) REFERENCES usuarios(id),
+    FOREIGN KEY (turma_id) REFERENCES turmas(id),
+    FOREIGN KEY (monitor_id) REFERENCES usuarios(id)
+);
+
+
+
+CREATE TABLE tempo_trabalho (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    aprendiz_id INT NOT NULL,
+
+    segundos_totais INT DEFAULT 0,
+
+    iniciado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (aprendiz_id)
+    REFERENCES usuarios(id)
+);
+
+
+CREATE TABLE produtividade (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    aprendiz_id INT,
+
+    dia_semana VARCHAR(20),
+
+    produtividade INT DEFAULT 0,
+
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (aprendiz_id)
+    REFERENCES usuarios(id)
+);
+CREATE TABLE tarefas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    aprendiz_id INT,
+
+    titulo VARCHAR(255),
+
+    descricao TEXT,
+
+    status ENUM(
+        'fazer',
+        'progresso',
+        'concluido'
+    ) DEFAULT 'fazer',
+
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (aprendiz_id)
+    REFERENCES usuarios(id)
+);
+
 

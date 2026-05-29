@@ -1,0 +1,98 @@
+.app-background{
+    min-height:100vh;
+    background-image:url('../img/backgrounds/backgrounds.jpeg');
+    background-size:cover;
+    background-position:center;
+    padding:20px;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+
+.turmas-container{
+    width:100%;
+    max-width:1200px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.topo-turmas{
+    background:#070b14;
+    border-radius:16px;
+    padding:25px;
+    color:#fff;
+}
+
+.topo-turmas h1{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.form-turma{
+    background:#070b14;
+    border-radius:16px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.form-turma input,
+.form-turma textarea{
+    width:100%;
+    background:#0d1526;
+    border:none;
+    border-radius:10px;
+    padding:15px;
+    color:#fff;
+    outline:none;
+}
+
+.form-turma textarea{
+    resize:none;
+    height:120px;
+}
+
+.btn-criar{
+    background:#0056ff;
+    border:none;
+    color:#fff;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:.3s;
+}
+
+.btn-criar:hover{
+    background:#0041c2;
+}
+
+.lista-turmas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.turma-card{
+    background:#070b14;
+    border-radius:16px;
+    padding:20px;
+    border:1px solid rgba(255,255,255,0.05);
+    color:#fff;
+    transition:.3s;
+}
+
+.turma-card:hover{
+    transform:translateY(-5px);
+}
+
+.turma-card h3{
+    margin-bottom:10px;
+}
+
+.turma-card p{
+    color:#a0a5aa;
+    line-height:1.5;
+}

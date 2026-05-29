@@ -1,28 +1,136 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    const registerForm = document.getElementById('registerForm');
+import { API_URL } from '../config/config.js';
 
-    if (registerForm) {
-        registerForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evita o recarregamento da página
+document.addEventListener('DOMContentLoaded', async () => {
 
-            const senha = document.getElementById('senha').value;
-            const confirmarSenha = document.getElementById('confirmar-senha').value;
+    const registerForm =
+        document.getElementById('registerForm');
 
-            if (senha !== confirmarSenha) {
-                alert('As senhas não coincidem. Por favor, tente novamente.');
-                return;
+    const turmaSelect =
+        document.getElementById('turma');
+
+    async function carregarTurmas(){
+
+        try{
+
+            const response =
+                await fetch(
+                    `${API_URL}/listar-turmas`
+                );
+
+            const turmas =
+                await response.json();
+
+            turmaSelect.innerHTML = '';
+
+            turmas.forEach(turma => {
+
+                turmaSelect.innerHTML += `
+                    <option value="${turma.id}">
+                        ${turma.nome}
+                    </option>
+                `;
+
+            });
+
+        }catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+
+    if(turmaSelect){
+
+        await carregarTurmas();
+
+    }
+
+    if(registerForm){
+
+        registerForm.addEventListener(
+            'submit',
+            async (event) => {
+
+                event.preventDefault();
+
+                const nome =
+                    document.getElementById('nome').value;
+
+                const email =
+                    document.getElementById('email').value;
+
+                const senha =
+                    document.getElementById('senha').value;
+
+                const confirmarSenha =
+                    document.getElementById(
+                        'confirmar-senha'
+                    ).value;
+
+                const turma_id =
+                    document.getElementById('turma').value;
+
+                if(senha !== confirmarSenha){
+
+                    alert('As senhas não coincidem');
+
+                    return;
+
+                }
+
+                try{
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/cadastro-aprendiz`,
+                            {
+
+                                method:'POST',
+
+                                headers:{
+                                    'Content-Type':'application/json'
+                                },
+
+                                body: JSON.stringify({
+
+                                    nome,
+                                    email,
+                                    senha,
+                                    turma_id
+
+                                })
+
+                            }
+                        );
+
+                    const data =
+                        await response.json();
+
+                    if(data.success){
+
+                        alert('Cadastro realizado');
+
+                        window.location.href =
+                            'loginAprendiz.html';
+
+                    }else{
+
+                        alert(data.message);
+
+                    }
+
+                }catch(error){
+
+                    console.error(error);
+
+                    alert('Erro no cadastro');
+
+                }
+
             }
+        );
 
-            // Simulação de sucesso no cadastro
-            alert('Cadastro realizado com sucesso!');
-            
-            // Limpa o formulário
-            registerForm.reset();
-
-            // Redireciona imediatamente para a tela de login correspondente
-            window.location.href = 'loginAprendiz.html';
-        });
     }
 
 });
