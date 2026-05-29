@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+    
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/configuracoes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-background">
+        
+        <button id="menuToggle" class="menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="profile-section">
+                <a href="perfil.html" class="profile-icon">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item"><i class="fa-regular fa-folder-open"></i><span>Projetos</span></a>
+                <a href="monitoramento.html" class="nav-item"><i class="fa-solid fa-table-columns"></i><span>DashBoard</span></a>
+                <a href="#" class="nav-item"><i class="fa-regular fa-chart-bar"></i><span>Relatórios</span></a>
+                <a href="#" class="nav-item"><i class="fa-solid fa-check-to-slot"></i><span>Tarefas</span></a>
+            </nav>
+            <div class="settings-section">
+                <a href="configuracoes.html" class="nav-item active"><i class="fa-solid fa-gear"></i></a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="settings-glass-card">
+                
+                <div class="settings-menu">
+                    <h3>Configurações</h3>
+                    <ul>
+                        <li class="active"><i class="fa-solid fa-bell"></i> Notificações</li>
+                        <li><i class="fa-solid fa-shield-halved"></i> Segurança e Privacidade</li>
+                        <li><i class="fa-solid fa-palette"></i> Aparência</li>
+                    </ul>
+                </div>
+
+                <div class="vertical-divider"></div>
+
+                <div class="settings-panel">
+                    <h2>Notificações do Sistema</h2>
+                    <p class="panel-desc">Gerencie como você recebe atualizações sobre tarefas e progresso.</p>
+                    
+                    <div class="settings-list">
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Alertas de Tarefas</h4>
+                                <span>Receber notificações quando uma tarefa for concluída.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Resumo Semanal</h4>
+                                <span>Receber um e-mail com a produtividade da semana.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Som de Notificação</h4>
+                                <span>Tocar um alerta sonoro dentro da plataforma.</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <div class="settings-actions">
+                        <button class="btn-save">Salvar Alterações</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="../assets/js/pages/configuracoes.js"></script>
+</body>
+</html>

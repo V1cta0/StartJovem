@@ -14,13 +14,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Lógica de integração com a API virá aqui posteriormente
+            // Simulação de sucesso no cadastro
             alert('Cadastro de Gestor realizado com sucesso!');
             
+            // Limpa o formulário
             registerGestorForm.reset();
             
-            // Redireciona para o login do gestor após o cadastro (opcional)
-            // window.location.href = 'loginGestor.html';
+            // Redireciona imediatamente para a tela de login do gestor
+            window.location.href = 'loginGestor.html';
         });
     }
 

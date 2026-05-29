@@ -1,13 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
+    
     const loginAprendizForm = document.getElementById('loginAprendizForm');
 
     if (loginAprendizForm) {
         loginAprendizForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            // Lógica de autenticação na API
-            alert('Login de Aprendiz efetuado!');
-            // Redirecionamento para a Home do Aprendiz
-            // window.location.href = '../home.html';
+            
+            // Aqui entraria a verificação de e-mail e senha na API
+            alert('Login de Aprendiz efetuado com sucesso!');
+            
+            // Redireciona imediatamente para a área de monitoramento (Dashboard)
+            window.location.href = 'monitoramento.html';
         });
     }
+
 });

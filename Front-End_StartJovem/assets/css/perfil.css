@@ -1,0 +1,220 @@
+.app-background {
+    min-height: 100vh;
+    background-image: url('../img/backgrounds/backgrounds.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+}
+
+.menu-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px; 
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.sidebar {
+    position: fixed;
+    left: -100px; 
+    top: 0;
+    height: 100vh;
+    width: 100px;
+    background: rgba(20, 25, 40, 0.8);
+    backdrop-filter: blur(15px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    transition: left 0.3s ease;
+    z-index: 999;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+.profile-section { margin-bottom: 40px; }
+
+.profile-icon { 
+    width: 50px; 
+    height: 50px; 
+    background: #fff; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    font-size: 1.5rem; 
+    color: #1a2733; 
+    text-decoration: none; /* Adicionado para remover o traço do link */
+    cursor: pointer; /* Adicionado para a mãozinha */
+}
+
+.sidebar-nav { display: flex; flex-direction: column; gap: 30px; width: 100%; }
+.nav-item { display: flex; flex-direction: column; align-items: center; color: #a0a5aa; text-decoration: none; font-size: 0.7rem; gap: 8px; transition: color 0.3s; }
+.nav-item i { font-size: 1.5rem; }
+.nav-item:hover, .nav-item.active { color: #ffffff; }
+.settings-section { margin-top: auto; }
+
+.main-content {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-glass-card {
+    background: rgba(30, 30, 40, 0.5); 
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    display: flex;
+    width: 100%;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.left-column, .right-column {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vertical-divider {
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.avatar-circle {
+    width: 70px;
+    height: 70px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #333;
+}
+
+.user-info h2 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.user-info span {
+    color: #a0a5aa;
+    font-size: 0.85rem;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group label {
+    color: #ffffff;
+    font-size: 0.85rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.profile-form input {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: rgba(238, 242, 245, 0.8);
+    border: none;
+    border-radius: 6px;
+    color: #333;
+    font-weight: bold;
+    outline: none;
+}
+
+.forgot-pass {
+    text-align: right;
+}
+
+.forgot-pass a {
+    color: #a0a5aa;
+    font-size: 0.75rem;
+    text-decoration: none;
+}
+
+.forgot-pass a:hover {
+    color: #ffffff;
+}
+
+.btn-curriculo {
+    margin-top: 10px;
+    background-color: rgba(238, 242, 245, 0.9);
+    color: #333;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-curriculo:hover {
+    background-color: #ffffff;
+}
+
+.right-column {
+    align-items: center;
+}
+
+.badge-title {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 8px 30px;
+    border-radius: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.bio-text {
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .profile-glass-card {
+        flex-direction: column;
+    }
+    .vertical-divider {
+        width: 100%;
+        height: 1px;
+        margin: 0;
+    }
+}

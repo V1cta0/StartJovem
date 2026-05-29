@@ -1,0 +1,240 @@
+.app-background {
+    min-height: 100vh;
+    background-image: url('../img/backgrounds/backgrounds.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-layout {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    gap: 20px;
+}
+
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: #0056ff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.sidebar {
+    width: 100px;
+    background: rgba(20, 25, 40, 0.4);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+    transition: transform 0.3s ease;
+}
+
+.profile-section {
+    margin-bottom: 40px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #1a2733;
+    text-decoration: none; /* Adicionado para remover o traço do link */
+    cursor: pointer; /* Adicionado para a mãozinha */
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a0a5aa;
+    text-decoration: none;
+    font-size: 0.7rem;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.nav-item i {
+    font-size: 1.5rem;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: #ffffff;
+}
+
+.settings-section {
+    margin-top: auto;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0b111e;
+    padding: 15px 25px;
+    border-radius: 12px;
+}
+
+.search-bar input {
+    background: transparent;
+    border: none;
+    color: #fff;
+    outline: none;
+    font-size: 1rem;
+    width: 300px;
+}
+
+.notification-bell {
+    color: #a0a5aa;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 20px;
+}
+
+.card {
+    background: #070b14;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    color: #a0a5aa;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.info-card h3 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.icon-right {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.chart-card {
+    grid-column: span 2;
+}
+
+.timer-card {
+    text-align: center;
+    align-items: center;
+}
+
+.timer-display h2 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.btn-timer {
+    background: transparent;
+    border: 2px solid #555;
+    color: #ffffff;
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-timer:hover {
+    border-color: #ffffff;
+}
+
+.kanban-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.kanban-item {
+    background: #5a5f6e;
+    color: #1a1a1a;
+    padding: 10px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+@media (max-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .chart-card {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; 
+    }
+    .dashboard-layout {
+        flex-direction: column;
+    }
+    .sidebar {
+        position: fixed;
+        left: -150px;
+        top: 0;
+        height: 100vh;
+        z-index: 999;
+        border-radius: 0 30px 30px 0;
+    }
+    .sidebar.active {
+        left: 0; 
+    }
+    .main-content {
+        margin-top: 50px; 
+    }
+}
