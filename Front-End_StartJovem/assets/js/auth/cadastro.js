@@ -8,14 +8,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const turmaSelect =
         document.getElementById('turma');
 
-    async function carregarTurmas(){
+    async function carregarTurmas() {
 
-        try{
+        try {
 
             const response =
-                await fetch(
-                    `${API_URL}/listar-turmas`
-                );
+                await fetch(`${API_URL}/listar-turmas`);
 
             const turmas =
                 await response.json();
@@ -32,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             });
 
-        }catch(error){
+        } catch (error) {
 
             console.error(error);
 
@@ -40,13 +38,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     }
 
-    if(turmaSelect){
+    if (turmaSelect) {
 
         await carregarTurmas();
 
     }
 
-    if(registerForm){
+    if (registerForm) {
 
         registerForm.addEventListener(
             'submit',
@@ -64,14 +62,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     document.getElementById('senha').value;
 
                 const confirmarSenha =
-                    document.getElementById(
-                        'confirmar-senha'
-                    ).value;
+                    document.getElementById('confirmar-senha').value;
 
-                const turma_id =
-                    document.getElementById('turma').value;
-
-                if(senha !== confirmarSenha){
+                if (senha !== confirmarSenha) {
 
                     alert('As senhas não coincidem');
 
@@ -79,48 +72,41 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 }
 
-                try{
+                try {
 
                     const response =
                         await fetch(
                             `${API_URL}/cadastro-aprendiz`,
                             {
-
-                                method:'POST',
-
-                                headers:{
-                                    'Content-Type':'application/json'
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
                                 },
-
                                 body: JSON.stringify({
-
                                     nome,
                                     email,
-                                    senha,
-                                    turma_id
-
+                                    senha
                                 })
-
                             }
                         );
 
                     const data =
                         await response.json();
 
-                    if(data.success){
+                    if (data.sucesso) {
 
-                        alert('Cadastro realizado');
+                        alert(data.mensagem);
 
                         window.location.href =
                             'loginAprendiz.html';
 
-                    }else{
+                    } else {
 
-                        alert(data.message);
+                        alert(data.mensagem);
 
                     }
 
-                }catch(error){
+                } catch (error) {
 
                     console.error(error);
 

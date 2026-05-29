@@ -1,58 +1,80 @@
+import { API_URL } from '../config/config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    const registerGestorForm = document.getElementById('registerGestorForm');
+    const registerGestorForm =
+        document.getElementById('registerGestorForm');
 
-    if(registerGestorForm){
+    if (registerGestorForm) {
 
-        registerGestorForm.addEventListener('submit', async function(event){
+        registerGestorForm.addEventListener(
+            'submit',
+            async function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const nome = document.getElementById('nome').value;
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
-            const confirmarSenha = document.getElementById('confirmar-senha').value;
+                const nome =
+                    document.getElementById('nome').value;
 
-            if(senha !== confirmarSenha){
-                alert('As senhas não coincidem.');
-                return;
-            }
+                const email =
+                    document.getElementById('email').value;
 
-            try{
+                const senha =
+                    document.getElementById('senha').value;
 
-                const response = await fetch('http://localhost:1880/cadastro-gestor', {
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        nome,
-                        email,
-                        senha
-                    })
-                });
+                const confirmarSenha =
+                    document.getElementById('confirmar-senha').value;
 
-                const data = await response.json();
+                if (senha !== confirmarSenha) {
 
-                alert(data.mensagem);
+                    alert('As senhas não coincidem.');
 
-                if(data.sucesso){
-
-                    registerGestorForm.reset();
-
-                    window.location.href = 'loginGestor.html';
+                    return;
 
                 }
 
-            }catch(error){
+                try {
 
-                console.error(error);
+                    const response =
+                        await fetch(
+                            `${API_URL}/cadastro-gestor`,
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    nome,
+                                    email,
+                                    senha
+                                })
+                            }
+                        );
 
-                alert('Erro ao cadastrar gestor.');
+                    const data =
+                        await response.json();
+
+                    alert(data.mensagem);
+
+                    if (data.sucesso) {
+
+                        registerGestorForm.reset();
+
+                        window.location.href =
+                            'loginGestor.html';
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert('Erro ao cadastrar gestor.');
+
+                }
 
             }
-
-        });
+        );
 
     }
 

@@ -1,54 +1,75 @@
+import { API_URL } from '../config/config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    const loginGestorForm = document.getElementById('loginGestorForm');
+    const loginGestorForm =
+        document.getElementById('loginGestorForm');
 
-    if(loginGestorForm){
+    if (loginGestorForm) {
 
-        loginGestorForm.addEventListener('submit', async function(event){
+        loginGestorForm.addEventListener(
+            'submit',
+            async function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
+                const email =
+                    document.getElementById('email').value;
 
-            try{
+                const senha =
+                    document.getElementById('senha').value;
 
-                const response = await fetch('http://localhost:1880/login-gestor', {
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        email,
-                        senha
-                    })
-                });
+                try {
 
-                const data = await response.json();
+                    const response =
+                        await fetch(
+                            `${API_URL}/login`,
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    email,
+                                    senha
+                                })
+                            }
+                        );
 
-                if(data.sucesso){
+                    const data =
+                        await response.json();
 
-                    localStorage.setItem('gestor', JSON.stringify(data.usuario));
+                    if (
+                        data.sucesso &&
+                        data.usuario.tipo === 'gestor'
+                    ) {
 
-                    alert(data.mensagem);
+                        localStorage.setItem(
+                            'gestor',
+                            JSON.stringify(data.usuario)
+                        );
 
-                    window.location.href = 'monitoramento.html';
+                        alert(data.mensagem || 'Login realizado');
 
-                }else{
+                        window.location.href =
+                            'dashboardGestor.html';
 
-                    alert(data.mensagem);
+                    } else {
+
+                        alert('Usuário não é gestor.');
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert('Erro ao realizar login.');
 
                 }
 
-            }catch(error){
-
-                console.error(error);
-
-                alert('Erro ao realizar login.');
-
             }
-
-        });
+        );
 
     }
 

@@ -1,20 +1,100 @@
-```html
-<form id="turmaForm">
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turmas - 3aq Tec</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/turmas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
-    <input
-        type="text"
-        id="nomeTurma"
-        placeholder="Nome da turma"
-    >
+    <div class="app-background">
+        
+        <aside class="sidebar" id="sidebar">
+            <div class="profile-section">
+                <a href="perfil.html" class="profile-icon">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="projetos.html" class="nav-item"><i class="fa-regular fa-folder-open"></i><span>Projetos</span></a>
+                <a href="monitoramento.html" class="nav-item"><i class="fa-solid fa-table-columns"></i><span>DashBoard</span></a>
+                <a href="turmas.html" class="nav-item active"><i class="fa-solid fa-users"></i><span>Turmas</span></a>
+                <a href="sobre.html" class="nav-item"><i class="fa-solid fa-circle-info"></i><span>Sobre</span></a>
+            </nav>
+            <div class="settings-section">
+                <a href="configuracoes.html" class="nav-item"><i class="fa-solid fa-gear"></i></a>
+            </div>
+        </aside>
 
-    <textarea
-        id="descricaoTurma"
-        placeholder="Descrição"
-    ></textarea>
+        <main class="main-content">
+            <div class="turmas-container">
+                
+                <div id="section-aprendiz" class="perfil-wrapper">
+                    <div class="turmas-header">
+                        <h2>Minhas <strong class="txt-azul">Turmas</strong></h2>
+                        <p class="panel-desc">Gerencie e acesse as informações das suas turmas ativas.</p>
+                    </div>
+                    <div class="grid-turmas">
+                        <div class="turma-card border-azul">
+                            <div class="turma-icon ico-azul"><i class="fa-solid fa-code"></i></div>
+                            <h3>Desenvolvimento Web</h3>
+                            <span class="turma-tag tag-azul">Turma A - 2026</span>
+                            <p>Foco em tecnologias Front-End (HTML, CSS, JavaScript) e estruturas de microsserviços.</p>
+                            <button class="btn-turma btn-azul" data-target="monitoramento.html">Acessar Painel</button>
+                        </div>
+                        <div class="turma-card border-azul">
+                            <div class="turma-icon ico-azul"><i class="fa-solid fa-database"></i></div>
+                            <h3>Banco de Dados & Cloud</h3>
+                            <span class="turma-tag tag-azul">Turma B - 2026</span>
+                            <p>Modelagem SQL, bancos NoSQL de alta performance e arquitetura AWS/GCP.</p>
+                            <button class="btn-turma btn-azul" data-target="monitoramento.html">Acessar Painel</button>
+                        </div>
+                    </div>
+                </div>
 
-    <button type="submit">
-        Criar Turma
-    </button>
+                <div id="section-gestor" class="perfil-wrapper">
 
-</form>
-```
+                    <div class="turmas-header">
+                        <h2>Painel do <strong class="txt-roxo">Gestor</strong></h2>
+                        <p class="panel-desc">
+                            Gerencie turmas e aprendizes.
+                        </p>
+                    </div>
+
+                    <form id="turmaForm">
+
+                        <input
+                            type="text"
+                            id="nomeTurma"
+                            placeholder="Nome da turma"
+                            required
+                        >
+
+                        <textarea
+                            id="descricaoTurma"
+                            placeholder="Descrição"
+                        ></textarea>
+
+                        <button type="submit">
+                            Criar Turma
+                        </button>
+
+                    </form>
+
+                    <div id="listaTurmas"></div>
+
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script
+    type="module"
+    src="../assets/js/pages/turmas.js">
+    </script>
+</body>
+</html>

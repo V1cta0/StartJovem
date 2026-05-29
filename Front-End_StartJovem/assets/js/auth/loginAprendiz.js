@@ -1,53 +1,74 @@
+import { API_URL } from '../config/config.js';
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    const loginAprendizForm = document.getElementById('loginAprendizForm');
+    const loginAprendizForm =
+        document.getElementById('loginAprendizForm');
 
     if (loginAprendizForm) {
 
-        loginAprendizForm.addEventListener('submit', async function(event) {
+        loginAprendizForm.addEventListener(
+            'submit',
+            async function (event) {
 
-            event.preventDefault();
+                event.preventDefault();
 
-            const email = document.getElementById('email').value;
-            const senha = document.getElementById('senha').value;
+                const email =
+                    document.getElementById('email').value;
 
-            try {
+                const senha =
+                    document.getElementById('senha').value;
 
-                const response = await fetch('http://localhost:1880/login-aprendiz', {
-                    method:'POST',
-                    headers:{
-                        'Content-Type':'application/json'
-                    },
-                    body: JSON.stringify({
-                        email,
-                        senha
-                    })
-                });
+                try {
 
-                const data = await response.json();
+                    const response = await fetch(
+                        `${API_URL}/login-aprendiz`,
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email,
+                                senha
+                            })
+                        }
+                    );
 
-                if(data.sucesso){
+                    const data =
+                        await response.json();
 
-                    alert(data.mensagem);
+                    if (
+                        data.sucesso &&
+                        data.usuario.tipo === 'aprendiz'
+                    ) {
 
-                    localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                        localStorage.setItem(
+                            'usuario',
+                            JSON.stringify(data.usuario)
+                        );
 
-                    window.location.href = 'monitoramento.html';
+                        alert(data.mensagem || 'Login realizado');
 
-                }else{
+                        window.location.href =
+                            'monitoramento.html';
 
-                    alert(data.mensagem);
+                    } else {
+
+                        alert('Usuário não é aprendiz.');
+
+                    }
+
+                } catch (error) {
+
+                    console.error(error);
+
+                    alert('Erro ao realizar login.');
 
                 }
 
-            } catch(error){
-
-                console.error(error);
-                alert('Erro ao realizar login.');
-
             }
-
-        });
+        );
 
     }
 

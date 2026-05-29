@@ -1,6 +1,6 @@
 import { API_URL } from '../config/config.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
 
     const turmaForm =
         document.getElementById('turmaForm');
@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const listaTurmas =
         document.getElementById('listaTurmas');
 
-    async function listarTurmas(){
+    async function listarTurmas() {
 
         const response =
             await fetch(
@@ -28,7 +28,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     <h3>${turma.nome}</h3>
 
-                    <p>${turma.descricao}</p>
+                    <p>${turma.descricao || ''}</p>
+
+                    <small>
+                        Status:
+                        ${turma.status}
+                    </small>
 
                 </div>
 
@@ -38,41 +43,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     }
 
-    turmaForm.addEventListener('submit', async (e) => {
+    turmaForm.addEventListener(
+        'submit',
+        async (e) => {
 
-        e.preventDefault();
+            e.preventDefault();
 
-        const nome =
-            document.getElementById('nomeTurma').value;
+            const nome =
+                document.getElementById(
+                    'nomeTurma'
+                ).value;
 
-        const descricao =
-            document.getElementById(
-                'descricaoTurma'
-            ).value;
+            const descricao =
+                document.getElementById(
+                    'descricaoTurma'
+                ).value;
 
-        await fetch(
-            `${API_URL}/criar-turma`,
-            {
+            await fetch(
+                `${API_URL}/criar-turma`,
+                {
+                    method: 'POST',
 
-                method:'POST',
+                    headers: {
+                        'Content-Type':
+                        'application/json'
+                    },
 
-                headers:{
-                    'Content-Type':'application/json'
-                },
+                    body: JSON.stringify({
+                        nome,
+                        descricao
+                    })
+                }
+            );
 
-                body: JSON.stringify({
-                    nome,
-                    descricao
-                })
+            turmaForm.reset();
 
-            }
-        );
-
-        turmaForm.reset();
-
-        listarTurmas();
-
-    });
+            listarTurmas();
+        }
+    );
 
     listarTurmas();
 
