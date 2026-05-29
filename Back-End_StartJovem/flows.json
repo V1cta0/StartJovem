@@ -7,6 +7,40 @@
         "info": ""
     },
     {
+        "id": "afcae6b20b1e1273",
+        "type": "tab",
+        "label": "Auth Aprendiz",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "flow_dashboard",
+        "type": "tab",
+        "label": "Dashboard StartJovem",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "mysql_config",
+        "type": "MySQLdatabase",
+        "name": "StartJovem",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "StartJovem",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "mysql_config_dashboard",
+        "type": "MySQLdatabase",
+        "name": "StartJovem",
+        "host": "localhost",
+        "port": "3306",
+        "db": "StartJovem",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
         "id": "3fd417d48026653b",
         "type": "http in",
         "z": "48a2a193d2a3bd81",
@@ -424,17 +458,509 @@
         "wires": []
     },
     {
-        "id": "mysql_config",
-        "type": "MySQLdatabase",
-        "name": "StartJovem",
-        "host": "127.0.0.1",
-        "port": "3306",
-        "db": "StartJovem",
-        "tz": "",
-        "charset": "UTF8"
+        "id": "17281efe5da79cbd",
+        "type": "http in",
+        "z": "afcae6b20b1e1273",
+        "name": "Cadastro Aprendiz",
+        "url": "/cadastro-aprendiz",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "b57090c5a8e16675"
+            ]
+        ]
     },
     {
-        "id": "377e82a272095d21",
+        "id": "b57090c5a8e16675",
+        "type": "function",
+        "z": "afcae6b20b1e1273",
+        "name": "Inserir Aprendiz",
+        "func": "const nome = msg.payload.nome;\nconst email = msg.payload.email;\nconst senha = msg.payload.senha;\n\nmsg.topic = `INSERT INTO usuarios(nome,email,senha,tipo) VALUES (?,?,?,'aprendiz')`;\nmsg.payload = [nome,email,senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 100,
+        "wires": [
+            [
+                "b43613463f776ec5"
+            ]
+        ]
+    },
+    {
+        "id": "b43613463f776ec5",
+        "type": "mysql",
+        "z": "afcae6b20b1e1273",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 100,
+        "wires": [
+            [
+                "4c4a81e434071e73"
+            ]
+        ]
+    },
+    {
+        "id": "4c4a81e434071e73",
+        "type": "function",
+        "z": "afcae6b20b1e1273",
+        "name": "Resposta Cadastro",
+        "func": "msg.payload = {\n    sucesso:true,\n    mensagem:'Cadastro realizado com sucesso!'\n};\n\nreturn msg;",
+        "outputs": 1,
+        "x": 890,
+        "y": 100,
+        "wires": [
+            [
+                "e3916459a28b15d6"
+            ]
+        ]
+    },
+    {
+        "id": "e3916459a28b15d6",
+        "type": "http response",
+        "z": "afcae6b20b1e1273",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1120,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "3d71143b4d34dceb",
+        "type": "http in",
+        "z": "afcae6b20b1e1273",
+        "name": "Login Aprendiz",
+        "url": "/login-aprendiz",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "ea4732541645dfab"
+            ]
+        ]
+    },
+    {
+        "id": "ea4732541645dfab",
+        "type": "function",
+        "z": "afcae6b20b1e1273",
+        "name": "Buscar Usuário",
+        "func": "const email = msg.payload.email;\nconst senha = msg.payload.senha;\n\nmsg.topic = `SELECT * FROM usuarios WHERE email = ? AND senha = ? AND tipo = 'aprendiz'`;\nmsg.payload = [email,senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "49b9278fec0ccf65"
+            ]
+        ]
+    },
+    {
+        "id": "49b9278fec0ccf65",
+        "type": "mysql",
+        "z": "afcae6b20b1e1273",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "a0160ced27da55a1"
+            ]
+        ]
+    },
+    {
+        "id": "a0160ced27da55a1",
+        "type": "function",
+        "z": "afcae6b20b1e1273",
+        "name": "Validar Login",
+        "func": "if(msg.payload.length > 0){\n\n    msg.payload = {\n        sucesso:true,\n        mensagem:'Login realizado com sucesso!',\n        usuario:msg.payload[0]\n    };\n\n}else{\n\n    msg.payload = {\n        sucesso:false,\n        mensagem:'Email ou senha inválidos'\n    };\n\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 890,
+        "y": 260,
+        "wires": [
+            [
+                "9235c2415d94834b"
+            ]
+        ]
+    },
+    {
+        "id": "9235c2415d94834b",
+        "type": "http response",
+        "z": "afcae6b20b1e1273",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1120,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "login_gestor_http",
+        "type": "http in",
+        "z": "afcae6b20b1e1273",
+        "name": "Login Gestor",
+        "url": "/login-gestor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "login_gestor_function"
+            ]
+        ]
+    },
+    {
+        "id": "login_gestor_function",
+        "type": "function",
+        "z": "afcae6b20b1e1273",
+        "name": "SELECT Gestor",
+        "func": "const { email, senha } = msg.payload;\n\nmsg.topic = `SELECT * FROM usuarios WHERE email = ? AND senha = ? AND tipo = 'gestor'`;\nmsg.payload = [email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 380,
+        "wires": [
+            [
+                "mysql_login_gestor"
+            ]
+        ]
+    },
+    {
+        "id": "mysql_login_gestor",
+        "type": "mysql",
+        "z": "afcae6b20b1e1273",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 650,
+        "y": 380,
+        "wires": [
+            [
+                "response_login_gestor"
+            ]
+        ]
+    },
+    {
+        "id": "response_login_gestor",
+        "type": "function",
+        "z": "afcae6b20b1e1273",
+        "name": "Resposta Gestor",
+        "func": "if(msg.payload.length > 0){\n\nmsg.payload = {\nsucesso:true,\nmensagem:'Login realizado com sucesso!',\nusuario:msg.payload[0]\n};\n\n}else{\n\nmsg.payload = {\nsucesso:false,\nmensagem:'Email ou senha inválidos'\n};\n\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 890,
+        "y": 380,
+        "wires": [
+            [
+                "http_response_login_gestor"
+            ]
+        ]
+    },
+    {
+        "id": "http_response_login_gestor",
+        "type": "http response",
+        "z": "afcae6b20b1e1273",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1120,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "http_tempo_get",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Tempo",
+        "url": "/tempo-aprendiz/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "fn_tempo_get"
+            ]
+        ]
+    },
+    {
+        "id": "fn_tempo_get",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Tempo",
+        "func": "msg.topic = `SELECT segundos_totais FROM tempo_trabalho WHERE aprendiz_id = ?`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "fn_tempo_format",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Formatar Tempo",
+        "func": "msg.payload = msg.payload[0] || { segundos_totais: 0 };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 820,
+        "y": 80,
+        "wires": [
+            [
+                "res_tempo"
+            ]
+        ]
+    },
+    {
+        "id": "res_tempo",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1040,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "http_salvar_tempo",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "POST Salvar Tempo",
+        "url": "/salvar-tempo",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "fn_salvar_tempo"
+            ]
+        ]
+    },
+    {
+        "id": "fn_salvar_tempo",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Salvar Tempo",
+        "func": "msg.topic = `INSERT INTO tempo_trabalho (aprendiz_id, segundos_totais) VALUES (?, ?) ON DUPLICATE KEY UPDATE segundos_totais = VALUES(segundos_totais)`;\nmsg.payload = [msg.payload.aprendiz_id, msg.payload.segundos_totais];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "res_salvar_tempo",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1030,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "http_tarefas",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Tarefas",
+        "url": "/tarefas/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "fn_tarefas"
+            ]
+        ]
+    },
+    {
+        "id": "fn_tarefas",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Tarefas",
+        "func": "msg.topic = `SELECT * FROM tarefas WHERE aprendiz_id = ? ORDER BY criado_em DESC`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "res_tarefas",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1030,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "http_produtividade",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Produtividade",
+        "url": "/produtividade-semanal/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 320,
+        "wires": [
+            [
+                "fn_produtividade"
+            ]
+        ]
+    },
+    {
+        "id": "fn_produtividade",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Produtividade",
+        "func": "msg.topic = `SELECT produtividade FROM produtividade WHERE aprendiz_id = ? ORDER BY id ASC LIMIT 7`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "fn_produtividade_format",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Formatar Gráfico",
+        "func": "const dados = msg.payload.map(item => item.produtividade);\nmsg.payload = dados;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 830,
+        "y": 320,
+        "wires": [
+            [
+                "res_produtividade"
+            ]
+        ]
+    },
+    {
+        "id": "res_produtividade",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1060,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "http_turma",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Turma",
+        "url": "/turma-aprendiz/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "fn_turma"
+            ]
+        ]
+    },
+    {
+        "id": "fn_turma",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Turma",
+        "func": "msg.topic = `SELECT t.nome FROM turmas t INNER JOIN turma_aprendizes ta ON ta.turma_id = t.id WHERE ta.aprendiz_id = ?`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "fn_turma_format",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Formatar Turma",
+        "func": "msg.payload = msg.payload[0] || { nome: 'Sem turma' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 820,
+        "y": 400,
+        "wires": [
+            [
+                "res_turma"
+            ]
+        ]
+    },
+    {
+        "id": "res_turma",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1040,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "mysql_dashboard",
+        "type": "mysql",
+        "z": "flow_dashboard",
+        "mydb": "mysql_config_dashboard",
+        "name": "MySQL StartJovem",
+        "x": 620,
+        "y": 240,
+        "wires": [
+            [
+                "fn_tempo_format",
+                "res_salvar_tempo",
+                "res_tarefas",
+                "fn_produtividade_format",
+                "fn_turma_format"
+            ]
+        ]
+    },
+    {
+        "id": "2ae783252361c0ca",
         "type": "global-config",
         "env": [],
         "modules": {
