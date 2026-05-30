@@ -1,87 +1,172 @@
-import { API_URL } from '../config/config.js';
+const API_URL = "http://localhost:1880";
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    const turmaForm =
-        document.getElementById('turmaForm');
+    const turmaForm = document.getElementById("turmaForm");
+    const listaTurmas = document.getElementById("listaTurmas");
 
-    const listaTurmas =
-        document.getElementById('listaTurmas');
+    await carregarTurmas();
 
-    async function listarTurmas() {
+    if (turmaForm) {
 
-        const response =
-            await fetch(
-                `${API_URL}/listar-turmas`
-            );
+        turmaForm.addEventListener("submit", async (event) => {
 
-        const turmas =
-            await response.json();
+            event.preventDefault();
 
-        listaTurmas.innerHTML = '';
+            const nome =
+                document.getElementById("nomeTurma").value;
 
-        turmas.forEach(turma => {
+            const descricao =
+                document.getElementById("descricaoTurma").value;
 
-            listaTurmas.innerHTML += `
+            try {
 
-                <div class="turma-card">
+                const response =
+                    await fetch(
+                        `${API_URL}/criar-turma`,
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                nome,
+                                descricao
+                            })
+                        }
+                    );
 
-                    <h3>${turma.nome}</h3>
+                const data =
+                    await response.json();
 
-                    <p>${turma.descricao || ''}</p>
+                if (data.sucesso) {
 
-                    <small>
-                        Status:
-                        ${turma.status}
-                    </small>
+                    alert(data.mensagem);
 
-                </div>
+                    turmaForm.reset();
 
-            `;
+                    carregarTurmas();
+
+                } else {
+
+                    alert(data.mensagem);
+
+                }
+
+            } catch (error) {
+
+                console.error(error);
+
+                alert("Erro ao criar turma.");
+
+            }
 
         });
 
     }
 
-    turmaForm.addEventListener(
-        'submit',
-        async (e) => {
+    async function carregarTurmas() {
 
-            e.preventDefault();
+        try {
 
-            const nome =
-                document.getElementById(
-                    'nomeTurma'
-                ).value;
+            const response =
+                await fetch(
+                    `${API_URL}/listar-turmas`
+                );
 
-            const descricao =
-                document.getElementById(
-                    'descricaoTurma'
-                ).value;
+            const turmas =
+                await response.json();
 
-            await fetch(
-                `${API_URL}/criar-turma`,
-                {
-                    method: 'POST',
+            if (!listaTurmas) return;
 
-                    headers: {
-                        'Content-Type':
-                        'application/json'
-                    },
+            listaTurmas.innerHTML = "";
 
-                    body: JSON.stringify({
-                        nome,
-                        descricao
-                    })
-                }
-            );
+            if (turmas.length === 0) {
 
-            turmaForm.reset();
+                listaTurmas.innerHTML =
+                    "<p>Nenhuma turma cadastrada.</p>";
 
-            listarTurmas();
+                return;
+
+            }
+
+            turmas.forEach(turma => {
+
+                listaTurmas.innerHTML += `
+                    <div class="turma-card border-roxo">
+
+                        <div class="turma-icon ico-roxo">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <h3>${turma.nome}</h3>
+
+                        <p>
+                            ${turma.descricao || "Sem descrição"}
+                        </p>
+
+                        <button
+                            class="btn-turma"
+                            onclick="verAlunos(${turma.id}, '${turma.nome}')"
+                        >
+                            Ver Alunos
+                        </button>
+
+                    </div>
+                `;
+
+            });
+
+        } catch (error) {
+
+            console.error(error);
+
         }
-    );
 
-    listarTurmas();
+    }
 
 });
+
+window.verAlunos = async function (turmaId, nomeTurma) {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API_URL}/alunos-turma/${turmaId}`
+            );
+
+        const alunos =
+            await response.json();
+
+        if (alunos.length === 0) {
+
+            alert(
+                `A turma "${nomeTurma}" não possui alunos.`
+            );
+
+            return;
+
+        }
+
+        let mensagem =
+            `Turma: ${nomeTurma}\n\n`;
+
+        alunos.forEach(aluno => {
+
+            mensagem +=
+                `• ${aluno.nome} (${aluno.email})\n`;
+
+        });
+
+        alert(mensagem);
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Erro ao carregar alunos.");
+
+    }
+
+};

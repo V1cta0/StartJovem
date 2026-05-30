@@ -1,98 +1,246 @@
-.app-background{
-    min-height:100vh;
-    background-image:url('../img/backgrounds/backgrounds.jpeg');
-    background-size:cover;
-    background-position:center;
-    padding:20px;
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
+.app-background {
+    min-height: 100vh;
+    background-image: url('../img/backgrounds/backgrounds.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
 }
 
-.turmas-container{
-    width:100%;
-    max-width:1200px;
-    display:flex;
-    flex-direction:column;
-    gap:20px;
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100px;
+    height: 100vh;
+    background: rgba(20, 25, 40, 0.8);
+    backdrop-filter: blur(15px);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
 }
 
-.topo-turmas{
-    background:#070b14;
-    border-radius:16px;
-    padding:25px;
-    color:#fff;
+.profile-section {
+    margin-bottom: 40px;
 }
 
-.topo-turmas h1{
-    font-size:2rem;
-    margin-bottom:10px;
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: #1a2733;
+    font-size: 1.5rem;
 }
 
-.form-turma{
-    background:#070b14;
-    border-radius:16px;
-    padding:25px;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
 }
 
-.form-turma input,
-.form-turma textarea{
-    width:100%;
-    background:#0d1526;
-    border:none;
-    border-radius:10px;
-    padding:15px;
-    color:#fff;
-    outline:none;
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a0a5aa;
+    text-decoration: none;
+    font-size: 0.7rem;
+    gap: 8px;
 }
 
-.form-turma textarea{
-    resize:none;
-    height:120px;
+.nav-item.active,
+.nav-item:hover {
+    color: white;
 }
 
-.btn-criar{
-    background:#0056ff;
-    border:none;
-    color:#fff;
-    padding:15px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:1rem;
-    transition:.3s;
+.nav-item i {
+    font-size: 1.5rem;
 }
 
-.btn-criar:hover{
-    background:#0041c2;
+.settings-section {
+    margin-top: auto;
 }
 
-.lista-turmas{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
+.main-content {
+    flex: 1;
+    margin-left: 100px;
+    padding: 40px;
 }
 
-.turma-card{
-    background:#070b14;
-    border-radius:16px;
-    padding:20px;
-    border:1px solid rgba(255,255,255,0.05);
-    color:#fff;
-    transition:.3s;
+.turmas-container {
+    background: rgba(30, 30, 40, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 1100px;
+    margin: auto;
 }
 
-.turma-card:hover{
-    transform:translateY(-5px);
+.turmas-header {
+    margin-bottom: 25px;
 }
 
-.turma-card h3{
-    margin-bottom:10px;
+.turmas-header h2 {
+    color: white;
+    font-size: 2rem;
 }
 
-.turma-card p{
-    color:#a0a5aa;
-    line-height:1.5;
+.panel-desc {
+    color: #c9c9c9;
+}
+
+.txt-azul {
+    color: #3da9fc;
+}
+
+.txt-roxo {
+    color: #b388ff;
+}
+
+.grid-turmas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+    gap: 20px;
+}
+
+.turma-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    transition: 0.3s;
+}
+
+.turma-card:hover {
+    transform: translateY(-5px);
+}
+
+.border-azul {
+    border-left: 4px solid #3da9fc;
+}
+
+.turma-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.ico-azul {
+    background: rgba(61,169,252,0.2);
+    color: #3da9fc;
+}
+
+.turma-tag {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.tag-azul {
+    background: rgba(61,169,252,0.2);
+    color: #3da9fc;
+}
+
+.btn-turma {
+    width: 100%;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 15px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-azul {
+    background: #3da9fc;
+    color: white;
+}
+
+#turmaForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+#turmaForm input,
+#turmaForm textarea,
+#turmaSelect,
+#aprendizSelect {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.9);
+    outline: none;
+}
+
+#turmaForm button,
+#btnAtribuir {
+    background: #7c4dff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#listaTurmas {
+    display: grid;
+    gap: 15px;
+}
+
+.turma-item {
+    background: rgba(255,255,255,0.08);
+    padding: 15px;
+    border-radius: 10px;
+    color: white;
+}
+
+.atribuir-card {
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.atribuir-card h3 {
+    color: white;
+    margin-bottom: 15px;
+}
+
+.atribuir-card select {
+    margin-bottom: 10px;
+}
+
+@media(max-width:768px){
+
+    .main-content{
+        margin-left:0;
+        padding:20px;
+    }
+
+    .sidebar{
+        display:none;
+    }
+
+    .grid-turmas{
+        grid-template-columns:1fr;
+    }
 }
