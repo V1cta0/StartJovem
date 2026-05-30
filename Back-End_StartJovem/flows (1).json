@@ -1,0 +1,1493 @@
+[
+    {
+        "id": "48a2a193d2a3bd81",
+        "type": "tab",
+        "label": "Sistema Aprendiz",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "flow_dashboard",
+        "type": "tab",
+        "label": "Dashboard StartJovem",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c6c1498fd7368b4d",
+        "type": "tab",
+        "label": "Fluxo 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "mysql_config",
+        "type": "MySQLdatabase",
+        "name": "StartJovem",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "StartJovem",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "mysql_config_dashboard",
+        "type": "MySQLdatabase",
+        "name": "StartJovem",
+        "host": "localhost",
+        "port": "3306",
+        "db": "StartJovem",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "fe1566d81adf014f",
+        "type": "MySQLdatabase",
+        "name": "StartJovem",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "StartJovem",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "3fd417d48026653b",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Cadastro Aprendiz",
+        "url": "/cadastro-aprendiz",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 180,
+        "wires": [
+            [
+                "8bd2ab4167c9f827"
+            ]
+        ]
+    },
+    {
+        "id": "8bd2ab4167c9f827",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Aprendiz",
+        "func": "const { nome, email, senha } = msg.payload;\n\nmsg.topic = `INSERT INTO usuarios(nome,email,senha,tipo) VALUES (?,?,?,'aprendiz')`;\nmsg.payload = [nome, email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "6cc2996c91b465bf"
+            ]
+        ]
+    },
+    {
+        "id": "6cc2996c91b465bf",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 680,
+        "y": 180,
+        "wires": [
+            [
+                "8c588e65da6272e6"
+            ]
+        ]
+    },
+    {
+        "id": "8c588e65da6272e6",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Aprendiz cadastrado com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 880,
+        "y": 180,
+        "wires": [
+            [
+                "878207d0fb4b7f8a"
+            ]
+        ]
+    },
+    {
+        "id": "878207d0fb4b7f8a",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1080,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "613e4514e68ef3b9",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Cadastro Gestor",
+        "url": "/cadastro-gestor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 280,
+        "wires": [
+            [
+                "17a0b3082fa525c6"
+            ]
+        ]
+    },
+    {
+        "id": "17a0b3082fa525c6",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Gestor",
+        "func": "const { nome, email, senha } = msg.payload;\n\nmsg.topic = `INSERT INTO usuarios(nome,email,senha,tipo) VALUES (?,?,?,'gestor')`;\nmsg.payload = [nome, email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "09ed01a712df41ca"
+            ]
+        ]
+    },
+    {
+        "id": "09ed01a712df41ca",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 660,
+        "y": 280,
+        "wires": [
+            [
+                "ac412b0c6bf33dce"
+            ]
+        ]
+    },
+    {
+        "id": "ac412b0c6bf33dce",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Gestor cadastrado com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 860,
+        "y": 280,
+        "wires": [
+            [
+                "a872652d20f73991"
+            ]
+        ]
+    },
+    {
+        "id": "a872652d20f73991",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1060,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "b8988e62c5060491",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Login",
+        "url": "/login",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "01d0345cc1d4746e"
+            ]
+        ]
+    },
+    {
+        "id": "01d0345cc1d4746e",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "SELECT Login",
+        "func": "const { email, senha } = msg.payload;\n\nmsg.topic = `SELECT * FROM usuarios WHERE email = ? AND senha = ?`;\nmsg.payload = [email, senha];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "91614723b86871d2"
+            ]
+        ]
+    },
+    {
+        "id": "91614723b86871d2",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 650,
+        "y": 400,
+        "wires": [
+            [
+                "f2e75638405710a2"
+            ]
+        ]
+    },
+    {
+        "id": "f2e75638405710a2",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Validar Login",
+        "func": "if(msg.payload.length > 0){\n    msg.payload = {\n        sucesso:true,\n        usuario:msg.payload[0]\n    }\n}else{\n    msg.payload = {\n        sucesso:false,\n        mensagem:'Email ou senha inválidos'\n    }\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 870,
+        "y": 400,
+        "wires": [
+            [
+                "1e88f2eea7248405"
+            ]
+        ]
+    },
+    {
+        "id": "1e88f2eea7248405",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1090,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "1eededb6e5c0763d",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Criar Turma",
+        "url": "/criar-turma",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [
+                "0f9e08bad6705b30"
+            ]
+        ]
+    },
+    {
+        "id": "0f9e08bad6705b30",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "INSERT Turma",
+        "func": "const { nome, descricao } = msg.payload;\n\nmsg.topic = `\nINSERT INTO turmas(nome, descricao)\nVALUES (?, ?)\n`;\n\nmsg.payload = [\n    nome,\n    descricao\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 520,
+        "wires": [
+            [
+                "20275ca816ba7027"
+            ]
+        ]
+    },
+    {
+        "id": "20275ca816ba7027",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 660,
+        "y": 520,
+        "wires": [
+            [
+                "31559313f13ca6d9"
+            ]
+        ]
+    },
+    {
+        "id": "31559313f13ca6d9",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta",
+        "func": "msg.payload = {\n sucesso:true,\n mensagem:'Turma criada com sucesso'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 860,
+        "y": 520,
+        "wires": [
+            [
+                "1c46154f1882d343"
+            ]
+        ]
+    },
+    {
+        "id": "1c46154f1882d343",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1070,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "855d915629c18594",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Listar Turmas",
+        "url": "/listar-turmas",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 640,
+        "wires": [
+            [
+                "ab19aea0b317500f"
+            ]
+        ]
+    },
+    {
+        "id": "ab19aea0b317500f",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "SELECT Turmas",
+        "func": "msg.topic = `\nSELECT *\nFROM turmas\nORDER BY nome\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 640,
+        "wires": [
+            [
+                "9f66c0d27576d034"
+            ]
+        ]
+    },
+    {
+        "id": "9f66c0d27576d034",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 670,
+        "y": 640,
+        "wires": [
+            [
+                "7623d7110b6a0a4a"
+            ]
+        ]
+    },
+    {
+        "id": "7623d7110b6a0a4a",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "b8b6a44bd7eff023",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "ListarAprendizes",
+        "url": "/listar-aprendizes",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 740,
+        "wires": [
+            [
+                "b525fedc7025ec10"
+            ]
+        ]
+    },
+    {
+        "id": "b525fedc7025ec10",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "listar",
+        "func": "msg.topic = `\nSELECT\n    id,\n    nome,\n    email\nFROM usuarios\nWHERE tipo = 'aprendiz'\nORDER BY nome\n`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 740,
+        "wires": [
+            [
+                "2c5b9e9e14beecf6"
+            ]
+        ]
+    },
+    {
+        "id": "692b04b8ad1fd3b9",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 830,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "2c5b9e9e14beecf6",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 650,
+        "y": 740,
+        "wires": [
+            [
+                "692b04b8ad1fd3b9"
+            ]
+        ]
+    },
+    {
+        "id": "066b86bf454bfceb",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "atribuirAprendizId",
+        "url": "/alunos-turma/:id",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 940,
+        "wires": [
+            [
+                "2583c83da5d656f8"
+            ]
+        ]
+    },
+    {
+        "id": "2583c83da5d656f8",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "aprendizId",
+        "func": "const turmaId = msg.req.params.id;\n\nmsg.topic = `\nSELECT\n    u.id,\n    u.nome,\n    u.email\nFROM turma_aprendizes ta\n\nINNER JOIN usuarios u\nON ta.aprendiz_id = u.id\n\nWHERE ta.turma_id = ?\n`;\n\nmsg.payload = [turmaId];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 940,
+        "wires": [
+            [
+                "64ea5468b8673222"
+            ]
+        ]
+    },
+    {
+        "id": "64ea5468b8673222",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 610,
+        "y": 940,
+        "wires": [
+            [
+                "2a9d2cca9523ab67"
+            ]
+        ]
+    },
+    {
+        "id": "2a9d2cca9523ab67",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 770,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "33fd0f3aa00f0969",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "turmaAprendiz",
+        "url": "/turma-aprendiz/:id",
+        "method": "get",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 1040,
+        "wires": [
+            [
+                "919c87e7fcb0b068"
+            ]
+        ]
+    },
+    {
+        "id": "919c87e7fcb0b068",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "aprendizTurma",
+        "func": "const aprendizId =\n    msg.req.params.id;\n\nmsg.topic = `\nSELECT\n    t.*\nFROM turmas t\n\nINNER JOIN turma_aprendizes ta\nON t.id = ta.turma_id\n\nWHERE ta.aprendiz_id = ?\nLIMIT 1\n`;\n\nmsg.payload = [\n    aprendizId\n];\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1040,
+        "wires": [
+            [
+                "419a1e61dd6cf7f8"
+            ]
+        ]
+    },
+    {
+        "id": "419a1e61dd6cf7f8",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "",
+        "x": 650,
+        "y": 1040,
+        "wires": [
+            [
+                "f9c20423d48a43b3"
+            ]
+        ]
+    },
+    {
+        "id": "78b15b79b7d208af",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "f9c20423d48a43b3",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "func": "msg.payload =\n    msg.payload[0] || {};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1040,
+        "wires": [
+            [
+                "78b15b79b7d208af"
+            ]
+        ]
+    },
+    {
+        "id": "3d71143b4d34dceb",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Login Aprendiz",
+        "url": "/login-aprendiz",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 340,
+        "wires": [
+            [
+                "ea4732541645dfab"
+            ]
+        ]
+    },
+    {
+        "id": "ea4732541645dfab",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Buscar Usuário",
+        "func": "const email = msg.payload.email;\nconst senha = msg.payload.senha;\n\nmsg.topic = `SELECT * FROM usuarios WHERE email = ? AND senha = ? AND tipo = 'aprendiz'`;\nmsg.payload = [email,senha];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 480,
+        "y": 340,
+        "wires": [
+            [
+                "49b9278fec0ccf65"
+            ]
+        ]
+    },
+    {
+        "id": "49b9278fec0ccf65",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 700,
+        "y": 340,
+        "wires": [
+            [
+                "a0160ced27da55a1"
+            ]
+        ]
+    },
+    {
+        "id": "a0160ced27da55a1",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Validar Login",
+        "func": "if(msg.payload.length > 0){\n\n    msg.payload = {\n        sucesso:true,\n        mensagem:'Login realizado com sucesso!',\n        usuario:msg.payload[0]\n    };\n\n}else{\n\n    msg.payload = {\n        sucesso:false,\n        mensagem:'Email ou senha inválidos'\n    };\n\n}\n\nreturn msg;",
+        "outputs": 1,
+        "x": 940,
+        "y": 340,
+        "wires": [
+            [
+                "9235c2415d94834b"
+            ]
+        ]
+    },
+    {
+        "id": "9235c2415d94834b",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1170,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "atribuirAprendiz",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "atribuirAprendiz",
+        "url": "/atribuir-aprendiz",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 840,
+        "wires": [
+            [
+                "verificarDuplicata"
+            ]
+        ]
+    },
+    {
+        "id": "verificarDuplicata",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Verificar Duplicata",
+        "func": "const { turma_id, aprendiz_id } = msg.payload;\n\nif (!turma_id || !aprendiz_id) {\n    msg.payload = { sucesso: false, mensagem: \"Turma e Aprendiz são obrigatórios\" };\n    return msg;\n}\n\n// Verifica se já existe vínculo\nmsg.topic = `SELECT COUNT(*) as total FROM turma_aprendizes WHERE turma_id = ? AND aprendiz_id = ?`;\nmsg.payload = [turma_id, aprendiz_id];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 420,
+        "y": 840,
+        "wires": [
+            [
+                "mysqlVerificar"
+            ]
+        ]
+    },
+    {
+        "id": "mysqlVerificar",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "StartJovem",
+        "x": 670,
+        "y": 840,
+        "wires": [
+            [
+                "decidirAcao"
+            ]
+        ]
+    },
+    {
+        "id": "decidirAcao",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Decidir Ação (Duplicata?)",
+        "func": "const count = msg.payload[0] ? msg.payload[0].total : 0;\n\nif (count > 0) {\n    // Já existe\n    msg.payload = {\n        sucesso: false,\n        mensagem: \"⚠️ Este aprendiz já está vinculado nesta turma!\"\n    };\n    return [msg, null];\n}\n\n// Pode inserir\nmsg.topic = `INSERT INTO turma_aprendizes (turma_id, aprendiz_id) VALUES (?, ?)`;\nmsg.payload = [msg.req.body.turma_id || msg.payload.turma_id, msg.req.body.aprendiz_id || msg.payload.aprendiz_id];\n\nreturn [null, msg];",
+        "outputs": 2,
+        "x": 920,
+        "y": 840,
+        "wires": [
+            [
+                "respostaErro"
+            ],
+            [
+                "mysqlInsert"
+            ]
+        ]
+    },
+    {
+        "id": "mysqlInsert",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "StartJovem",
+        "x": 1190,
+        "y": 900,
+        "wires": [
+            [
+                "respostaSucesso"
+            ]
+        ]
+    },
+    {
+        "id": "respostaErro",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta Erro",
+        "func": "msg.payload = {\n    sucesso: false,\n    mensagem: msg.payload.mensagem || \"Erro ao vincular\"\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 1240,
+        "y": 780,
+        "wires": [
+            [
+                "httpResponse"
+            ]
+        ]
+    },
+    {
+        "id": "respostaSucesso",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta Sucesso",
+        "func": "msg.payload = {\n    sucesso: true,\n    mensagem: \"✅ Aprendiz vinculado com sucesso!\"\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 1440,
+        "y": 900,
+        "wires": [
+            [
+                "httpResponse"
+            ]
+        ]
+    },
+    {
+        "id": "httpResponse",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "x": 1510,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "minhasTurmasHttp",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Minhas Turmas",
+        "url": "/minhas-turmas/:aprendizId",
+        "method": "get",
+        "x": 200,
+        "y": 1160,
+        "wires": [
+            [
+                "minhasTurmasFunction"
+            ]
+        ]
+    },
+    {
+        "id": "minhasTurmasFunction",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Buscar Minhas Turmas",
+        "func": "const aprendizId = msg.req.params.aprendizId;\n\nmsg.topic = `\nSELECT DISTINCT \n    t.id,\n    t.nome,\n    t.descricao\nFROM turmas t\nINNER JOIN turma_aprendizes ta ON t.id = ta.turma_id\nWHERE ta.aprendiz_id = ?\nORDER BY t.nome\n`;\n\nmsg.payload = [aprendizId];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 480,
+        "y": 1160,
+        "wires": [
+            [
+                "mysqlMinhasTurmas"
+            ]
+        ]
+    },
+    {
+        "id": "mysqlMinhasTurmas",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "StartJovem",
+        "x": 760,
+        "y": 1160,
+        "wires": [
+            [
+                "httpResponseMinhasTurmas"
+            ]
+        ]
+    },
+    {
+        "id": "httpResponseMinhasTurmas",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "x": 1030,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "http_tempo_get",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Tempo",
+        "url": "/tempo-aprendiz/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "fn_tempo_get"
+            ]
+        ]
+    },
+    {
+        "id": "fn_tempo_get",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Tempo",
+        "func": "msg.topic = `SELECT segundos_totais FROM tempo_trabalho WHERE aprendiz_id = ?`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 380,
+        "y": 80,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "fn_tempo_format",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Formatar Tempo",
+        "func": "msg.payload = msg.payload[0] || { segundos_totais: 0 };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 820,
+        "y": 80,
+        "wires": [
+            [
+                "res_tempo"
+            ]
+        ]
+    },
+    {
+        "id": "res_tempo",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1040,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "http_salvar_tempo",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "POST Salvar Tempo",
+        "url": "/salvar-tempo",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "fn_salvar_tempo"
+            ]
+        ]
+    },
+    {
+        "id": "fn_salvar_tempo",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Salvar Tempo",
+        "func": "msg.topic = `INSERT INTO tempo_trabalho (aprendiz_id, segundos_totais) VALUES (?, ?) ON DUPLICATE KEY UPDATE segundos_totais = VALUES(segundos_totais)`;\nmsg.payload = [msg.payload.aprendiz_id, msg.payload.segundos_totais];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "res_salvar_tempo",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1030,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "http_tarefas",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Tarefas",
+        "url": "/tarefas/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "fn_tarefas"
+            ]
+        ]
+    },
+    {
+        "id": "fn_tarefas",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Tarefas",
+        "func": "msg.topic = `SELECT * FROM tarefas WHERE aprendiz_id = ? ORDER BY criado_em DESC`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "res_tarefas",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1030,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "http_produtividade",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Produtividade",
+        "url": "/produtividade-semanal/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 320,
+        "wires": [
+            [
+                "fn_produtividade"
+            ]
+        ]
+    },
+    {
+        "id": "fn_produtividade",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Produtividade",
+        "func": "msg.topic = `SELECT produtividade FROM produtividade WHERE aprendiz_id = ? ORDER BY id ASC LIMIT 7`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 430,
+        "y": 320,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "fn_produtividade_format",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Formatar Gráfico",
+        "func": "const dados = msg.payload.map(item => item.produtividade);\nmsg.payload = dados;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 830,
+        "y": 320,
+        "wires": [
+            [
+                "res_produtividade"
+            ]
+        ]
+    },
+    {
+        "id": "res_produtividade",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1060,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "http_turma",
+        "type": "http in",
+        "z": "flow_dashboard",
+        "name": "GET Turma",
+        "url": "/turma-aprendiz/:id",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "fn_turma"
+            ]
+        ]
+    },
+    {
+        "id": "fn_turma",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Buscar Turma",
+        "func": "msg.topic = `SELECT t.nome FROM turmas t INNER JOIN turma_aprendizes ta ON ta.turma_id = t.id WHERE ta.aprendiz_id = ?`;\nmsg.payload = [msg.req.params.id];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "mysql_dashboard"
+            ]
+        ]
+    },
+    {
+        "id": "fn_turma_format",
+        "type": "function",
+        "z": "flow_dashboard",
+        "name": "Formatar Turma",
+        "func": "msg.payload = msg.payload[0] || { nome: 'Sem turma' };\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 820,
+        "y": 400,
+        "wires": [
+            [
+                "res_turma"
+            ]
+        ]
+    },
+    {
+        "id": "res_turma",
+        "type": "http response",
+        "z": "flow_dashboard",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1040,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "mysql_dashboard",
+        "type": "mysql",
+        "z": "flow_dashboard",
+        "mydb": "mysql_config_dashboard",
+        "name": "MySQL StartJovem",
+        "x": 620,
+        "y": 240,
+        "wires": [
+            [
+                "fn_tempo_format",
+                "res_salvar_tempo",
+                "res_tarefas",
+                "fn_produtividade_format",
+                "fn_turma_format"
+            ]
+        ]
+    },
+    {
+        "id": "784d6489e7550f7c",
+        "type": "http in",
+        "z": "c6c1498fd7368b4d",
+        "name": "GET Tempo",
+        "url": "/tempo-aprendiz/:id",
+        "method": "get",
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "844ec148eea3a462"
+            ]
+        ]
+    },
+    {
+        "id": "844ec148eea3a462",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Buscar Tempo",
+        "func": "const id = msg.req.params.id;\nmsg.topic = \"SELECT segundos_totais FROM tempo_trabalho WHERE aprendiz_id = ?\";\nmsg.payload = [id];\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "91a6b87cb7f8b468"
+            ]
+        ]
+    },
+    {
+        "id": "0be82fd8c3af58aa",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Formatar",
+        "func": "msg.payload = msg.payload[0] || { segundos_totais: 0 };\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "a9fda367db3965d3"
+            ]
+        ]
+    },
+    {
+        "id": "a9fda367db3965d3",
+        "type": "http response",
+        "z": "c6c1498fd7368b4d",
+        "name": "Response",
+        "x": 1010,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "80f9edd6d2f82bd2",
+        "type": "http in",
+        "z": "c6c1498fd7368b4d",
+        "name": "POST Tempo",
+        "url": "/salvar-tempo",
+        "method": "post",
+        "x": 310,
+        "y": 220,
+        "wires": [
+            [
+                "c21d4f89a792b6a3"
+            ]
+        ]
+    },
+    {
+        "id": "c21d4f89a792b6a3",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Salvar Tempo",
+        "func": "const { aprendiz_id, segundos_totais } = msg.payload;\nmsg.topic = \"INSERT INTO tempo_trabalho (aprendiz_id, segundos_totais) VALUES (?, ?) ON DUPLICATE KEY UPDATE segundos_totais = ?\";\nmsg.payload = [aprendiz_id, segundos_totais, segundos_totais];\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "91a6b87cb7f8b468"
+            ]
+        ]
+    },
+    {
+        "id": "bbbcae532c680109",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Resposta",
+        "func": "msg.payload = { sucesso: true };\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "4956859cc0b15d27"
+            ]
+        ]
+    },
+    {
+        "id": "4956859cc0b15d27",
+        "type": "http response",
+        "z": "c6c1498fd7368b4d",
+        "name": "Response",
+        "x": 1010,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "6aecefd3a6fe560c",
+        "type": "http in",
+        "z": "c6c1498fd7368b4d",
+        "name": "POST Produtividade",
+        "url": "/salvar-produtividade",
+        "method": "post",
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "c82e8a0b63c5e692"
+            ]
+        ]
+    },
+    {
+        "id": "c82e8a0b63c5e692",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Salvar Produtividade",
+        "func": "const { aprendiz_id, dia_semana, minutos } = msg.payload;\nconst dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'];\nconst diaNome = dias[dia_semana];\nconst hoje = new Date().toISOString().split('T')[0];\n\nmsg.topic = \"INSERT INTO produtividade (aprendiz_id, dia_semana, minutos, data_registro) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE minutos = ?\";\nmsg.payload = [aprendiz_id, diaNome, minutos, hoje, minutos];\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "91a6b87cb7f8b468"
+            ]
+        ]
+    },
+    {
+        "id": "c722cc33b1936c61",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Resposta",
+        "func": "msg.payload = { sucesso: true };\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "73f7afac07eef3d6"
+            ]
+        ]
+    },
+    {
+        "id": "73f7afac07eef3d6",
+        "type": "http response",
+        "z": "c6c1498fd7368b4d",
+        "name": "Response",
+        "x": 1010,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4c76ef160fc932ac",
+        "type": "http in",
+        "z": "c6c1498fd7368b4d",
+        "name": "GET Produtividade",
+        "url": "/produtividade-semanal/:id",
+        "method": "get",
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "b7715a4532605e0d"
+            ]
+        ]
+    },
+    {
+        "id": "b7715a4532605e0d",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Buscar Produtividade",
+        "func": "const id = msg.req.params.id;\nmsg.topic = \"SELECT dia_semana, minutos FROM produtividade WHERE aprendiz_id = ? AND data_registro >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\";\nmsg.payload = [id];\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "91a6b87cb7f8b468"
+            ]
+        ]
+    },
+    {
+        "id": "b048a8ccecdb4d56",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Formatar Array",
+        "func": "const dados = [0,0,0,0,0,0,0];\nconst diasMap = {'Segunda':0,'Terça':1,'Quarta':2,'Quinta':3,'Sexta':4,'Sábado':5,'Domingo':6};\n\nif(msg.payload && msg.payload.length > 0){\n    msg.payload.forEach(item => {\n        const idx = diasMap[item.dia_semana];\n        if(idx !== undefined) dados[idx] = item.minutos;\n    });\n}\n\nmsg.payload = dados;\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "222fa63bcfabe91a"
+            ]
+        ]
+    },
+    {
+        "id": "222fa63bcfabe91a",
+        "type": "http response",
+        "z": "c6c1498fd7368b4d",
+        "name": "Response",
+        "x": 1010,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "91a6b87cb7f8b468",
+        "type": "mysql",
+        "z": "c6c1498fd7368b4d",
+        "mydb": "mysql_config",
+        "name": "MySQL",
+        "x": 660,
+        "y": 260,
+        "wires": [
+            [
+                "0be82fd8c3af58aa",
+                "bbbcae532c680109",
+                "c722cc33b1936c61",
+                "b048a8ccecdb4d56"
+            ]
+        ]
+    },
+    {
+        "id": "05d4dc0f4923def0",
+        "type": "http in",
+        "z": "c6c1498fd7368b4d",
+        "name": "GET Turma",
+        "url": "/turma-aprendiz/:id",
+        "method": "get",
+        "x": 310,
+        "y": 460,
+        "wires": [
+            [
+                "f05842a63b7712f8"
+            ]
+        ]
+    },
+    {
+        "id": "f05842a63b7712f8",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Buscar Turma",
+        "func": "const id = msg.req.params.id;\nmsg.topic = \"SELECT t.nome FROM turmas t INNER JOIN turma_aprendizes ta ON ta.turma_id = t.id WHERE ta.aprendiz_id = ?\";\nmsg.payload = [id];\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "91a6b87cb7f8b468"
+            ]
+        ]
+    },
+    {
+        "id": "d213b7d8b7b60d7b",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Formatar",
+        "func": "msg.payload = (msg.payload && msg.payload[0]) ? msg.payload[0] : { nome: 'Sem turma' };\nreturn msg;",
+        "outputs": 1,
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "5f81947fb4d07d42"
+            ]
+        ]
+    },
+    {
+        "id": "5f81947fb4d07d42",
+        "type": "http response",
+        "z": "c6c1498fd7368b4d",
+        "name": "Response",
+        "x": 1010,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4de253c08407e3b4",
+        "type": "http in",
+        "z": "c6c1498fd7368b4d",
+        "name": "GET Tarefas",
+        "url": "/tarefas/:id",
+        "method": "get",
+        "x": 310,
+        "y": 540,
+        "wires": [
+            [
+                "9ae6a06a922f5c90"
+            ]
+        ]
+    },
+    {
+        "id": "9ae6a06a922f5c90",
+        "type": "function",
+        "z": "c6c1498fd7368b4d",
+        "name": "Buscar Tarefas",
+        "func": "const id = msg.req.params.id;\nmsg.topic = \"SELECT * FROM tarefas WHERE aprendiz_id = ? ORDER BY criado_em DESC\";\nmsg.payload = [id];\nreturn msg;",
+        "outputs": 1,
+        "x": 200,
+        "y": 60,
+        "wires": [
+            [
+                "91a6b87cb7f8b468"
+            ]
+        ]
+    },
+    {
+        "id": "3b416f9c4658e622",
+        "type": "http response",
+        "z": "c6c1498fd7368b4d",
+        "name": "Response",
+        "x": 1010,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "b9373b6fe6e491cd",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-mysql": "3.0.0"
+        }
+    }
+]

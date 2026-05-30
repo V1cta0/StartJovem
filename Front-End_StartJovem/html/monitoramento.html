@@ -3,30 +3,16 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Dashboard | StartJovem</title>
 
-    <title>Dashboard</title>
-
-    <link
-        rel="stylesheet"
-        href="../assets/css/global.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="../assets/css/monitoramento.css"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/monitoramento.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js para o gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 </head>
 
@@ -35,273 +21,128 @@
 <div class="app-background">
 
     <button id="menuToggle" class="menu-toggle">
-
         <i class="fa-solid fa-bars"></i>
-
     </button>
 
     <div class="dashboard-layout">
 
+        <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
-
             <div class="profile-section">
-
                 <a href="perfil.html" class="profile-icon">
-
                     <i class="fa-regular fa-user"></i>
-
                 </a>
-
             </div>
 
             <nav class="sidebar-nav">
-
-                <a
-                    href="monitoramento.html"
-                    class="nav-item active"
-                >
-
+                <a href="monitoramento.html" class="nav-item active">
                     <i class="fa-solid fa-table-columns"></i>
-
                     <span>Dashboard</span>
-
                 </a>
-
-                <a
-                    href="turmas.html"
-                    class="nav-item"
-                >
-
+                <a href="turmas.html" class="nav-item">
                     <i class="fa-solid fa-users"></i>
-
                     <span>Turmas</span>
-
                 </a>
-
-                <a
-                    href="tarefas.html"
-                    class="nav-item"
-                >
-
+                <a href="tarefas.html" class="nav-item">
                     <i class="fa-solid fa-list-check"></i>
-
                     <span>Tarefas</span>
-
                 </a>
-
             </nav>
 
             <div class="settings-section">
-
-                <a
-                    href="configuracoes.html"
-                    class="nav-item"
-                >
-
+                <a href="configuracoes.html" class="nav-item">
                     <i class="fa-solid fa-gear"></i>
-
                 </a>
-
             </div>
-
         </aside>
 
+        <!-- MAIN CONTENT -->
         <main class="main-content">
 
             <header class="top-header">
-
                 <div class="usuario-box">
-
-                    <h2 id="nomeUsuario">
-                        Usuário
-                    </h2>
-
-                    <span id="nomeTurma">
-                        Turma
-                    </span>
-
+                    <h2 id="nomeUsuario">Usuário</h2>
+                    <span id="nomeTurma">Turma</span>
                 </div>
-
-                <div class="notification-bell">
-
-                    <i class="fa-regular fa-bell"></i>
-
-                </div>
-
             </header>
 
             <div class="dashboard-grid">
 
+                <!-- Card 1: Tempo Trabalhado -->
                 <div class="card info-card">
-
                     <div class="card-header">
-
-                        <span>
-
-                            <i class="fa-solid fa-stopwatch"></i>
-
-                            Tempo Trabalhado
-
-                        </span>
-
+                        <span><i class="fa-solid fa-stopwatch"></i> Tempo Trabalhado</span>
                     </div>
-
                     <div class="card-body">
-
-                        <h3 id="tempoTotal">
-
-                            00:00:00
-
-                        </h3>
-
+                        <h3 id="tempoTotal">00:00:00</h3>
                     </div>
-
                 </div>
 
+                <!-- Card 2: Tarefas Concluídas -->
                 <div class="card info-card">
-
                     <div class="card-header">
-
-                        <span>
-
-                            Tarefas Concluídas
-
-                        </span>
-
+                        <span><i class="fa-solid fa-check-circle"></i> Tarefas Concluídas</span>
                     </div>
-
                     <div class="card-body">
-
-                        <h3 id="tarefasConcluidas">
-
-                            0
-
-                        </h3>
-
+                        <h3 id="tarefasConcluidas">0</h3>
                     </div>
-
                 </div>
 
+                <!-- Card 3: Projetos Ativos -->
                 <div class="card info-card">
-
                     <div class="card-header">
-
-                        <span>
-
-                            Projetos Ativos
-
-                        </span>
-
+                        <span><i class="fa-solid fa-rocket"></i> Projetos Ativos</span>
                     </div>
-
                     <div class="card-body">
-
-                        <h3 id="projetosAtivos">
-
-                            0
-
-                        </h3>
-
+                        <h3 id="projetosAtivos">0</h3>
                     </div>
-
                 </div>
 
+                <!-- Card 4: GRÁFICO DE PRODUTIVIDADE SEMANAL -->
                 <div class="card chart-card">
-
                     <div class="card-header">
-
-                        <span>
-
-                            Produtividade Semanal
-
-                        </span>
-
+                        <span><i class="fa-solid fa-chart-line"></i> Produtividade Semanal</span>
                     </div>
-
                     <div class="card-body">
-
-                        <canvas id="produtividadeChart"></canvas>
-
+                        <!-- CANVAS DO GRÁFICO - É AQUI QUE O GRÁFICO APARECE -->
+                        <canvas id="produtividadeChart" style="width:100%; height:300px;"></canvas>
                     </div>
-
                 </div>
 
+                <!-- Card 5: TEMPORIZADOR -->
                 <div class="card timer-card">
-
                     <div class="card-header">
-
-                        <span>
-
-                            Temporizador
-
-                        </span>
-
+                        <span><i class="fa-solid fa-hourglass-half"></i> Temporizador</span>
                     </div>
-
                     <div class="card-body timer-display">
-
-                        <h2 id="timerDisplay">
-
-                            00:00:00
-
-                        </h2>
-
-                        <button
-                            id="toggleTimerBtn"
-                            class="btn-timer"
-                        >
-
+                        <h2 id="timerDisplay">00:00:00</h2>
                             <i class="fa-solid fa-play"></i>
-
                         </button>
-
                     </div>
-
                 </div>
 
+                <!-- Card 6: Kanban - A FAZER -->
                 <div class="card kanban-column">
-
                     <div class="card-header">
-
-                        <span>A Fazer</span>
-
+                        <span><i class="fa-solid fa-clipboard-list"></i> A Fazer</span>
                     </div>
-
-                    <div
-                        class="card-body kanban-list"
-                        id="kanbanFazer"
-                    ></div>
-
+                    <div class="card-body kanban-list" id="kanbanFazer"></div>
                 </div>
 
+                <!-- Card 7: Kanban - EM PROGRESSO -->
                 <div class="card kanban-column">
-
                     <div class="card-header">
-
-                        <span>Em Progresso</span>
-
+                        <span><i class="fa-solid fa-spinner"></i> Em Progresso</span>
                     </div>
-
-                    <div
-                        class="card-body kanban-list"
-                        id="kanbanProgresso"
-                    ></div>
-
+                    <div class="card-body kanban-list" id="kanbanProgresso"></div>
                 </div>
 
+                <!-- Card 8: Kanban - CONCLUÍDO -->
                 <div class="card kanban-column">
-
                     <div class="card-header">
-
-                        <span>Concluído</span>
-
+                        <span><i class="fa-solid fa-check-double"></i> Concluído</span>
                     </div>
-
-                    <div
-                        class="card-body kanban-list"
-                        id="kanbanConcluido"
-                    ></div>
-
+                    <div class="card-body kanban-list" id="kanbanConcluido"></div>
                 </div>
 
             </div>
@@ -312,10 +153,8 @@
 
 </div>
 
-<script
-    type="module"
-    src="../assets/js/pages/monitoramento.js"
-></script>
+<!-- SEU JAVASCRIPT -->
+<script type="module" src="../assets/js/pages/monitoramento.js"></script>
 
 </body>
 </html>

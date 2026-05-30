@@ -43,6 +43,7 @@
     align-items: center;
     padding: 30px 0;
     transition: transform 0.3s ease;
+    min-height: 95vh;
 }
 
 .profile-section {
@@ -59,8 +60,8 @@
     align-items: center;
     font-size: 1.5rem;
     color: #1a2733;
-    text-decoration: none; /* Adicionado para remover o traço do link */
-    cursor: pointer; /* Adicionado para a mãozinha */
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .sidebar-nav {
@@ -85,7 +86,8 @@
     font-size: 1.5rem;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover,
+.nav-item.active {
     color: #ffffff;
 }
 
@@ -109,28 +111,40 @@
     border-radius: 12px;
 }
 
-.search-bar input {
-    background: transparent;
-    border: none;
+.usuario-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
     color: #fff;
-    outline: none;
-    font-size: 1rem;
-    width: 300px;
+}
+
+.usuario-box h2 {
+    font-size: 1.2rem;
+}
+
+.usuario-box span {
+    color: #a0a5aa;
+    font-size: 0.9rem;
 }
 
 .notification-bell {
     color: #a0a5aa;
     font-size: 1.5rem;
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.notification-bell:hover {
+    color: #fff;
 }
 
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto auto;
     gap: 20px;
 }
 
+/* Cards */
 .card {
     background: #070b14;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -138,31 +152,58 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
 }
 
 .card-header {
     color: #a0a5aa;
     font-size: 0.9rem;
     margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.info-card {
+    min-height: 130px;
+    justify-content: center;
 }
 
 .info-card h3 {
     color: #ffffff;
     font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin: 0;
 }
 
-.icon-right {
-    font-size: 1.2rem;
-    color: #555;
-}
-
+/* Card do gráfico */
 .chart-card {
     grid-column: span 2;
+    min-height: 450px;
 }
 
+.chart-card .card-body {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Canvas do gráfico - CORRIGIDO SEM ZOOM */
+#produtividadeChart {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 320px;
+    min-height: 280px;
+}
+
+/* Timer card */
 .timer-card {
     text-align: center;
     align-items: center;
@@ -191,10 +232,17 @@
     border-color: #ffffff;
 }
 
+/* Kanban */
+.kanban-column {
+    min-height: 400px;
+}
+
 .kanban-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 350px;
+    overflow-y: auto;
 }
 
 .kanban-item {
@@ -204,13 +252,81 @@
     border-radius: 20px;
     text-align: center;
     font-weight: bold;
-    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
+.kanban-item:hover {
+    background: #7b8196;
+}
+
+.kanban-item h4 {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.kanban-item p {
+    margin: 5px 0 0;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+/* Resumo estatístico do gráfico */
+.summary-stats {
+    margin-top: 15px;
+    padding: 12px;
+    background: rgba(7, 11, 20, 0.6);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.summary-stats .stat-item {
+    background: rgba(0, 86, 255, 0.1);
+    padding: 12px;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    text-align: center;
+}
+
+.summary-stats .stat-item:hover {
+    transform: translateY(-2px);
+    background: rgba(0, 86, 255, 0.15);
+}
+
+.summary-stats strong {
+    color: #a0a5aa;
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.summary-stats div > div {
+    color: #0056ff;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Scrollbar personalizada */
+.kanban-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.kanban-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.kanban-list::-webkit-scrollbar-thumb {
+    background: #0056ff;
+    border-radius: 3px;
+}
+
+/* Responsividade */
 @media (max-width: 1024px) {
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
+    
     .chart-card {
         grid-column: span 1;
     }
@@ -218,11 +334,13 @@
 
 @media (max-width: 768px) {
     .menu-toggle {
-        display: block; 
+        display: block;
     }
+    
     .dashboard-layout {
         flex-direction: column;
     }
+    
     .sidebar {
         position: fixed;
         left: -150px;
@@ -231,72 +349,17 @@
         z-index: 999;
         border-radius: 0 30px 30px 0;
     }
+    
     .sidebar.active {
-        left: 0; 
+        left: 0;
     }
+    
     .main-content {
-        margin-top: 50px; 
+        margin-top: 50px;
     }
-}
-.usuario-box{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    color:#fff;
-}
-
-.usuario-box h2{
-    font-size:1.2rem;
-}
-
-.usuario-box span{
-    color:#a0a5aa;
-    font-size:.9rem;
-}
-
-.card:hover{
-    transform:translateY(-4px);
-    transition:.3s;
-}
-
-.kanban-item{
-    cursor:pointer;
-    transition:.3s;
-}
-
-.kanban-item:hover{
-    background:#7b8196;
-}
-
-.chart-card canvas{
-    width:100% !important;
-    height:280px !important;
-}
-
-.info-card{
-    min-height:130px;
-    justify-content:center;
-}
-
-.sidebar{
-    min-height:95vh;
-}
-
-.notification-bell:hover{
-    color:#fff;
-    transition:.3s;
-}
-
-.search-bar{
-    width:100%;
-}
-
-.search-bar input{
-    width:100%;
-}
-
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    
+    .summary-stats > div {
+        grid-template-columns: 1fr !important;
+        gap: 10px;
+    }
 }

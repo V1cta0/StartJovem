@@ -112,13 +112,12 @@
     gap: 20px;
 }
 
-.turma-card {
-    background: rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 20px;
-    color: white;
-    transition: 0.3s;
-}
+.turma-card{
+    background:rgba(255,255,255,0.08);
+    border-radius:12px;
+    padding:20px;
+    color:white;
+}q
 
 .turma-card:hover {
     transform: translateY(-5px);
@@ -201,9 +200,11 @@
     font-weight: bold;
 }
 
-#listaTurmas {
-    display: grid;
-    gap: 15px;
+#listaTurmas{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+    gap:20px;
+    margin-top:20px;
 }
 
 .turma-item {
@@ -242,5 +243,262 @@
 
     .grid-turmas{
         grid-template-columns:1fr;
+    }
+}
+select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.9);
+    color: #333;
+    font-size: 15px;
+}
+
+#btnAtribuir {
+    width: 100%;
+    margin-top: 10px;
+    background: #7c4dff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#btnAtribuir:hover{
+    opacity:0.9;
+}
+
+
+/* ====================== MODAL ====================== */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: rgba(30, 30, 45, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 520px;
+    max-height: 85vh;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    animation: modalPop 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.7) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Cabeçalho do Modal */
+.modal-content h3 {
+    margin: 0;
+    padding: 25px 25px 15px;
+    color: white;
+    font-size: 1.4rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Botão Fechar */
+.close-modal {
+    position: absolute;
+    top: 18px;
+    right: 25px;
+    font-size: 32px;
+    color: #aaa;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: #ff6b6b;
+    transform: scale(1.1);
+}
+
+/* Lista de Alunos */
+.alunos-list {
+    padding: 15px 25px 25px;
+    max-height: 55vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Item de Aluno */
+.aluno-item {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px 18px;
+    border-left: 4px solid #b388ff;
+    transition: all 0.2s;
+}
+
+.aluno-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(5px);
+}
+
+.aluno-item strong {
+    color: white;
+    font-size: 1.05rem;
+}
+
+.aluno-item small {
+    color: #b0b0c0;
+    display: block;
+    margin-top: 4px;
+}
+
+/* Scrollbar bonitinha */
+.alunos-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.alunos-list::-webkit-scrollbar-thumb {
+    background: rgba(179, 136, 255, 0.5);
+    border-radius: 20px;
+}
+
+.alunos-list::-webkit-scrollbar-thumb:hover {
+    background: #b388ff;
+}
+
+/* ====================== VINCULAR APRENDIZ ====================== */
+
+.vincular-section {
+    background: rgba(30, 30, 45, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 35px;
+}
+
+.vincular-section h3 {
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.vincular-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.vincular-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.vincular-column label {
+    color: #b0b0c0;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.1);
+    color: white;
+    margin-bottom: 12px;
+    outline: none;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.search-input::placeholder {
+    color: #888;
+}
+
+.lista-seletor {
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.lista-seletor .item {
+    padding: 12px 14px;
+    border-radius: 8px;
+    margin: 4px 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: white;
+}
+
+.lista-seletor .item:hover {
+    background: rgba(179, 136, 255, 0.15);
+}
+
+.lista-seletor .item.selecionado {
+    background: #b388ff;
+    color: #1a1a2e;
+    font-weight: bold;
+}
+
+.btn-vincular {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #7c4dff, #b388ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-vincular:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(124, 77, 255, 0.4);
+}
+
+.btn-vincular:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .vincular-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }

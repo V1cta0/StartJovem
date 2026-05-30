@@ -36,53 +36,71 @@
 
         <main class="main-content">
             <div class="profile-glass-card">
-                
+
                 <div class="left-column">
                     <div class="user-header">
                         <div class="avatar-circle">
                             <i class="fa-regular fa-user"></i>
                         </div>
                         <div class="user-info">
-                            <h2>Nome Completo</h2>
-                            <span>Matrícula</span>
+                            <h2 id="nomeUsuario">Carregando...</h2>
                         </div>
                     </div>
 
-                    <form class="profile-form">
+                    <form class="profile-form" id="profileForm">
                         <div class="form-group">
-                            <label for="email">Email*</label>
-                            <input type="email" id="email" value="usuario@exemplo.com" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefone">Telefone*</label>
-                            <input type="tel" id="telefone" value="(00) 00000-0000">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" readonly>
                         </div>
                         <div class="form-group">
-                            <label for="senha">Senha*</label>
-                            <input type="password" id="senha" value="********">
+                            <label for="telefone">Telefone</label>
+                            <input type="tel" id="telefone">
                         </div>
-                        <div class="forgot-pass">
-                            <a href="#">Esqueceu a senha?</a>
-                        </div>
-                        
-                        <button type="button" class="btn-curriculo">Acessar Currículo</button>
+                        <button type="button" class="btn-edit" id="btnSalvar">Salvar Alterações</button>
                     </form>
                 </div>
 
                 <div class="vertical-divider"></div>
 
                 <div class="right-column">
-                    <div class="badge-title">Perfil</div>
-                    
-                    <div class="bio-text">
-                        <p>Neste campo você pode falar um pouco sobre quem você é, destacando suas principais qualidades, habilidades e também pontos que está buscando melhorar. Vale compartilhar suas experiências, interesses, objetivos e o que te motiva no dia a dia. Seja autêntico(a) e use esse espaço para mostrar sua personalidade e o que te torna único(a).</p>
+                    <div class="section">
+                        <h3>Sobre Mim</h3>
+                        <textarea id="bio" rows="4" placeholder="Fale um pouco sobre você..."></textarea>
+                    </div>
+
+                    <div class="section">
+                        <h3>Formação e Certificados</h3>
+                        <div id="listaCursos" class="items-list"></div>
+                        <div class="add-curso-area">
+                            <input type="text" id="nomeCurso" placeholder="Nome do curso">
+                            <input type="file" id="arquivoCurso" accept=".pdf,.jpg,.png">
+                            <button class="btn-add" id="addCurso">+ Adicionar</button>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Idiomas</h3>
+                        <div id="listaIdiomas" class="items-list"></div>
+                        <button class="btn-add" id="addIdioma">+ Adicionar Idioma</button>
+                    </div>
+
+                    <div class="section">
+                        <h3>Habilidades</h3>
+                        <div id="listaHabilidades" class="skills-container"></div>
+                        <div style="display: flex; gap: 8px;">
+                            <input type="text" id="novaHabilidade" placeholder="Ex: JavaScript, Figma...">
+                            <button class="btn-add" id="addHabilidade">Adicionar</button>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>
 
-    <script src="../assets/js/pages/perfil.js"></script>
+    <script
+    type="module"
+    src="../assets/js/pages/perfil.js">
+</script>
+
 </body>
 </html>
