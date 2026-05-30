@@ -3,138 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Turmas - 3aq Tec</title>
+    <title>Turmas | StartJovem</title>
 
     <link rel="stylesheet" href="../assets/css/global.css">
     <link rel="stylesheet" href="../assets/css/turmas.css">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
 <div class="app-background">
 
-    <aside class="sidebar" id="sidebar">
+    <button id="menuToggle" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+    </button>
 
-        <div class="profile-section">
-            <a href="perfil.html" class="profile-icon">
-                <i class="fa-regular fa-user"></i>
-            </a>
-        </div>
+    <div class="dashboard-layout">
 
-        <nav class="sidebar-nav">
-            <a href="projetos.html" class="nav-item">
-                <i class="fa-regular fa-folder-open"></i>
-                <span>Projetos</span>
-            </a>
-
-            <a href="monitoramento.html" class="nav-item">
-                <i class="fa-solid fa-table-columns"></i>
-                <span>DashBoard</span>
-            </a>
-
-            <a href="turmas.html" class="nav-item active">
-                <i class="fa-solid fa-users"></i>
-                <span>Turmas</span>
-            </a>
-
-            <a href="sobre.html" class="nav-item">
-                <i class="fa-solid fa-circle-info"></i>
-                <span>Sobre</span>
-            </a>
-        </nav>
-
-        <div class="settings-section">
-            <a href="configuracoes.html" class="nav-item">
-                <i class="fa-solid fa-gear"></i>
-            </a>
-        </div>
-
-    </aside>
-
-    <main class="main-content">
-
-    <div class="turmas-container">
-
-        <!-- ACESSO NEGADO -->
-        <div id="acesso-negado" class="acesso-negado" style="display: none;">
-            <h2>🔒 Acesso Restrito</h2>
-            <p>Esta área é exclusiva para Gestores.</p>
-            <a href="perfil.html" class="btn-turma">Voltar</a>
-        </div>
-
-        <!-- ÁREA DO APRENDIZ -->
-        <div id="section-aprendiz" class="perfil-wrapper">
-            <div class="turmas-header">
-                <h2>Minhas <strong class="txt-azul">Turmas</strong></h2>
-                <p class="panel-desc">Aqui estão as turmas em que você está matriculado.</p>
-            </div>
-            <div id="listaMinhasTurmas" class="grid-turmas"></div>
-        </div>
-
-        <!-- ÁREA DO GESTOR -->
-        <div id="section-gestor" class="perfil-wrapper">
-            <div class="turmas-header">
-                <h2>Painel do <strong class="txt-roxo">Gestor</strong></h2>
-                <p class="panel-desc">Gerencie turmas e aprendizes.</p>
+        <!-- SIDEBAR PADRONIZADA -->
+        <aside class="sidebar" id="sidebar">
+            <div class="profile-section">
+                <a href="perfil.html" class="profile-icon">
+                    <i class="fa-regular fa-user"></i>
+                </a>
             </div>
 
-            <!-- Formulário Criar Turma -->
-            <form id="turmaForm">
-                <input type="text" id="nomeTurma" placeholder="Nome da turma" required>
-                <textarea id="descricaoTurma" placeholder="Descrição da turma"></textarea>
-                <button type="submit">Criar Turma</button>
-            </form>
+            <nav class="sidebar-nav">
+                <a href="monitoramento.html" class="nav-item">
+                    <i class="fa-solid fa-table-columns"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="turmas.html" class="nav-item active">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Turmas</span>
+                </a>
+                <a href="sobre.html" class="nav-item">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Sobre</span>
+                </a>
+            </nav>
 
-            <br>
+            <div class="settings-section">
+                <a href="configuracoes.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+            </div>
+        </aside>
 
-            <!-- Lista de Turmas (Gestor) -->
-            <div id="listaTurmas" class="grid-turmas"></div>
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
 
-            <hr>
+            <div class="turmas-container">
 
-            <!-- Vincular Aprendiz -->
-            <div class="vincular-section">
-                <h3>Vincular Aprendiz à Turma</h3>
-                <!-- (seu formulário de vincular continua aqui) -->
-                <div class="vincular-grid">
-                    <div class="vincular-column">
-                        <label>Turma</label>
-                        <input type="text" id="searchTurma" placeholder="Buscar turma..." class="search-input">
-                        <div id="listaTurmasVincular" class="lista-seletor"></div>
+                <!-- ACESSO NEGADO -->
+                <div id="acesso-negado" class="acesso-negado" style="display: none;">
+                    <h2> Acesso Restrito</h2>
+                    <p>Esta área é exclusiva para Gestores.</p>
+                    <a href="perfil.html" class="btn-turma">Voltar</a>
+                </div>
+
+                <!-- ÁREA DO APRENDIZ -->
+                <div id="section-aprendiz" class="perfil-wrapper">
+                    <div class="turmas-header">
+                        <h2>Minhas <strong class="txt-azul">Turmas</strong></h2>
+                        <p class="panel-desc">Aqui estão as turmas em que você está matriculado.</p>
                     </div>
-                    <div class="vincular-column">
-                        <label>Aprendiz</label>
-                        <input type="text" id="searchAprendiz" placeholder="Buscar aprendiz..." class="search-input">
-                        <div id="listaAprendizesVincular" class="lista-seletor"></div>
+                    <div id="listaMinhasTurmas" class="grid-turmas"></div>
+                </div>
+
+                <!-- ÁREA DO GESTOR -->
+                <div id="section-gestor" class="perfil-wrapper" style="display: none;">
+                    <div class="turmas-header">
+                        <h2>Painel do <strong class="txt-roxo">Gestor</strong></h2>
+                        <p class="panel-desc">Gerencie turmas e aprendizes.</p>
+                    </div>
+
+                    <!-- Formulário Criar Turma -->
+                    <form id="turmaForm" class="turma-form">
+                        <input type="text" id="nomeTurma" placeholder="Nome da turma" required>
+                        <textarea id="descricaoTurma" placeholder="Descrição da turma" rows="3"></textarea>
+                        <button type="submit" class="btn-criar">Criar Turma</button>
+                    </form>
+
+                    <!-- Lista de Turmas (Gestor) -->
+                    <div id="listaTurmas" class="grid-turmas"></div>
+
+                    <!-- Vincular Aprendiz -->
+                    <div class="vincular-section">
+                        <h3><i class="fa-solid fa-link"></i> Vincular Aprendiz à Turma</h3>
+                        <div class="vincular-grid">
+                            <div class="vincular-column">
+                                <label>Turma</label>
+                                <input type="text" id="searchTurma" placeholder="Buscar turma..." class="search-input">
+                                <div id="listaTurmasVincular" class="lista-seletor"></div>
+                            </div>
+                            <div class="vincular-column">
+                                <label>Aprendiz</label>
+                                <input type="text" id="searchAprendiz" placeholder="Buscar aprendiz..." class="search-input">
+                                <div id="listaAprendizesVincular" class="lista-seletor"></div>
+                            </div>
+                        </div>
+                        <button id="btnVincular" class="btn-vincular">
+                            <i class="fa-solid fa-link"></i> Vincular Aprendiz
+                        </button>
                     </div>
                 </div>
-                <button id="btnVincular" class="btn-vincular">
-                    <i class="fa-solid fa-link"></i> Vincular Aprendiz
-                </button>
+
             </div>
-        </div>
+
+            <!-- Modal -->
+            <div id="modalAlunos" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h3 id="modalTurmaNome"></h3>
+                    <div id="listaAlunosModal" class="alunos-list"></div>
+                </div>
+            </div>
+
+        </main>
 
     </div>
-
-    <!-- Modal -->
-    <div id="modalAlunos" class="modal">
-        <div class="modal-content">
-            <span class="close-modal">&times;</span>
-            <h3 id="modalTurmaNome"></h3>
-            <div id="listaAlunosModal" class="alunos-list"></div>
-        </div>
-    </div>
-
-</main>
 
 </div>
 
-<script
-    type="module"
-    src="../assets/js/pages/turmas.js">
-</script>
+<script type="module" src="../assets/js/pages/turmas.js"></script>
 
 </body>
 </html>

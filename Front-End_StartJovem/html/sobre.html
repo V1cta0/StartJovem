@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nós | StartJovem</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/sobre.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app-background">
+
+    <button id="menuToggle" class="menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="dashboard-layout">
+
+        <!-- SIDEBAR (MESMO PADRÃO DO MONITORAMENTO) -->
+        <aside class="sidebar" id="sidebar">
+            <div class="profile-section">
+                <a href="perfil.html" class="profile-icon">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="monitoramento.html" class="nav-item">
+                    <i class="fa-solid fa-table-columns"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="turmas.html" class="nav-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Turmas</span>
+                </a>
+                <a href="sobre.html" class="nav-item active">
+                    <i class="fa-solid fa-circle-info"></i>
+                    <span>Sobre</span>
+                </a>
+            </nav>
+
+            <div class="settings-section">
+                <a href="configuracoes.html" class="nav-item">
+                    <i class="fa-solid fa-gear"></i>
+                </a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <header class="top-header">
+                <div class="usuario-box">
+                    <h2>Sobre o Sistema</h2>
+                    <span>StartJovem</span>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+
+                <!-- Card Principal - Sobre -->
+                <div class="card about-card">
+                    <div class="card-header">
+                        <span><i class="fa-solid fa-graduation-cap"></i> Sobre o Projeto</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Sistema de Gestão de Aprendizes</h3>
+                        <p>
+                            Uma plataforma desenvolvida para facilitar o gerenciamento de turmas,
+                            aprendizes e atividades acadêmicas de forma simples, moderna e eficiente.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card - Objetivo -->
+                <div class="card objective-card">
+                    <div class="card-header">
+                        <span><i class="fa-solid fa-bullseye"></i> Objetivo</span>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            Organizar e automatizar o controle de alunos (aprendizes),
+                            turmas e vínculos entre eles, permitindo maior eficiência na gestão educacional.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card - Tecnologias -->
+                <div class="card tech-card">
+                    <div class="card-header">
+                        <span><i class="fa-solid fa-code"></i> Tecnologias</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="tech-list">
+                            <span><i class="fa-brands fa-node"></i> Node-RED</span>
+                            <span><i class="fa-solid fa-database"></i> MySQL</span>
+                            <span><i class="fa-brands fa-js"></i> JavaScript</span>
+                            <span><i class="fa-brands fa-html5"></i> HTML5</span>
+                            <span><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+                            <span><i class="fa-solid fa-code"></i> API REST</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card - Funcionalidades (grande) -->
+                <div class="card features-card">
+                    <div class="card-header">
+                        <span><i class="fa-solid fa-star"></i> Funcionalidades</span>
+                    </div>
+                    <div class="card-body">
+                        <ul class="features-list">
+                            <li><i class="fa-solid fa-check-circle"></i> Cadastro de aprendizes e gestores</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Criação de turmas</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Vínculo de alunos em turmas</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Listagem dinâmica via API</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Dashboard interativo</li>
+                            <li><i class="fa-solid fa-check-circle"></i> Monitoramento de produtividade</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card - Equipe -->
+                <div class="card team-card">
+                    <div class="card-header">
+                        <span><i class="fa-solid fa-users"></i> Equipe</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Desenvolvido com dedicação para facilitar o aprendizado e gestão de turmas.</p>
+                        <div class="version">
+                            <i class="fa-regular fa-copyright"></i> 2026 Sistema Aprendiz
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+</div>
+
+<script src="../assets/js/pages/sobre.js"></script>
+
+</body>
+</html>

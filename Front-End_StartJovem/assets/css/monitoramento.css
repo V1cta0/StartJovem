@@ -363,3 +363,32 @@
         gap: 10px;
     }
 }
+/* Adicione isso ao final do seu monitoramento.css se não existir */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a0a5aa;
+    text-decoration: none;
+    font-size: 0.7rem;
+    gap: 8px;
+    transition: all 0.3s ease;
+    padding: 8px 0;
+}
+
+.nav-item i {
+    font-size: 1.5rem;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: #ffffff;
+    transform: translateY(-2px);
+}

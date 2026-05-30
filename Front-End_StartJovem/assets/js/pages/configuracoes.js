@@ -1,33 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // Controle do Menu Sanduíche da Sidebar principal
-    const menuToggle = document.getElementById('menuToggle');
+import { API_URL } from '../config/config.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+    if (!usuario) {
+        window.location.href = 'loginAprendiz.html';
+        return;
+    }
+
+    // Carregar dados do perfil
+    document.getElementById('nomeUsuario').value = usuario.nome || '';
+    document.getElementById('email').value = usuario.email || '';
+    document.getElementById('telefone').value = usuario.telefone || '';
+
+    // Salvar perfil
+    document.getElementById('btnSalvarPerfil').onclick = () => {
+        usuario.nome = document.getElementById('nomeUsuario').value;
+        usuario.telefone = document.getElementById('telefone').value;
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+        alert('✅ Perfil atualizado com sucesso!');
+    };
+
+    // Finalizar sessão (logout)
+    document.getElementById('btnLogout').onclick = () => {
+        if (confirm('Deseja realmente finalizar a sessão?')) {
+            localStorage.removeItem('usuario');
+            localStorage.removeItem('tipoUsuario');
+            window.location.href = 'login.html';
+        }
+    };
+
+    // Menu toggle
+    const toggle = document.getElementById('menuToggle');
     const sidebar = document.getElementById('sidebar');
-
-    if (menuToggle && sidebar) {
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
+    if (toggle && sidebar) {
+        toggle.onclick = () => sidebar.classList.toggle('active');
+        document.addEventListener('click', (e) => {
+            if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !toggle.contains(e.target))
+                sidebar.classList.remove('active');
         });
     }
-
-    // Ação do Botão Salvar
-    const btnSave = document.querySelector('.btn-save');
-    if (btnSave) {
-        btnSave.addEventListener('click', () => {
-            // Futuramente, aqui será feita a requisição PUT/PATCH para a API
-            alert('Configurações salvas com sucesso!');
-        });
-    }
-    
-    // Efeito visual no clique do menu lateral interno de configurações
-    const menuItems = document.querySelectorAll('.settings-menu li');
-    menuItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Remove 'active' de todos
-            menuItems.forEach(i => i.classList.remove('active'));
-            // Adiciona 'active' apenas no clicado
-            this.classList.add('active');
-        });
-    });
-
 });
