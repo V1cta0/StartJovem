@@ -92,7 +92,7 @@
         "id": "6cc2996c91b465bf",
         "type": "mysql",
         "z": "48a2a193d2a3bd81",
-        "mydb": "mysql_config",
+        "mydb": "mysql_config_dashboard",
         "name": "",
         "x": 680,
         "y": 180,
@@ -871,6 +871,74 @@
         "wires": []
     },
     {
+        "id": "criarTarefaHttp",
+        "type": "http in",
+        "z": "48a2a193d2a3bd81",
+        "name": "Criar Tarefa",
+        "url": "/criar-tarefa",
+        "method": "post",
+        "x": 210,
+        "y": 1300,
+        "wires": [
+            [
+                "criarTarefaFunction"
+            ]
+        ]
+    },
+    {
+        "id": "criarTarefaFunction",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Preparar INSERT Tarefa",
+        "func": "const { titulo, descricao, turma_id } = msg.payload;\n\nif (!titulo || !turma_id) {\n    msg.payload = { sucesso: false, mensagem: 'Título e turma são obrigatórios' };\n    return msg;\n}\n\nmsg.topic = `INSERT INTO tarefas (titulo, descricao, turma_id, status) VALUES (?, ?, ?, 'pendente')`;\nmsg.payload = [titulo, descricao || '', turma_id];\n\nreturn msg;",
+        "outputs": 1,
+        "x": 460,
+        "y": 1300,
+        "wires": [
+            [
+                "mysqlCriarTarefa"
+            ]
+        ]
+    },
+    {
+        "id": "mysqlCriarTarefa",
+        "type": "mysql",
+        "z": "48a2a193d2a3bd81",
+        "mydb": "mysql_config",
+        "name": "StartJovem",
+        "x": 710,
+        "y": 1300,
+        "wires": [
+            [
+                "respostaCriarTarefa"
+            ]
+        ]
+    },
+    {
+        "id": "respostaCriarTarefa",
+        "type": "function",
+        "z": "48a2a193d2a3bd81",
+        "name": "Resposta Criar Tarefa",
+        "func": "msg.payload = {\n    sucesso: true,\n    mensagem: 'Tarefa criada com sucesso!'\n};\nreturn msg;",
+        "outputs": 1,
+        "x": 960,
+        "y": 1300,
+        "wires": [
+            [
+                "httpResponseTarefa"
+            ]
+        ]
+    },
+    {
+        "id": "httpResponseTarefa",
+        "type": "http response",
+        "z": "48a2a193d2a3bd81",
+        "name": "",
+        "x": 1210,
+        "y": 1300,
+        "wires": []
+    },
+    {
         "id": "http_tempo_get",
         "type": "http in",
         "z": "flow_dashboard",
@@ -1142,9 +1210,9 @@
         "id": "mysql_dashboard",
         "type": "mysql",
         "z": "flow_dashboard",
-        "mydb": "mysql_config_dashboard",
+        "mydb": "mysql_config",
         "name": "MySQL StartJovem",
-        "x": 620,
+        "x": 630,
         "y": 240,
         "wires": [
             [
@@ -1483,7 +1551,7 @@
         "wires": []
     },
     {
-        "id": "b9373b6fe6e491cd",
+        "id": "abf9bca4a75eb226",
         "type": "global-config",
         "env": [],
         "modules": {
