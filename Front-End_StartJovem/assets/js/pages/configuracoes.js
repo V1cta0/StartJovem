@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (confirm('Deseja realmente finalizar a sessão?')) {
             localStorage.removeItem('usuario');
             localStorage.removeItem('tipoUsuario');
-            window.location.href = 'login.html';
+            window.location.href = '../html/index.html';
         }
     };
 

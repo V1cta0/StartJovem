@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const sectionGestor = document.getElementById("section-gestor");
     const acessoNegado = document.getElementById("acesso-negado");
 
-    // Esconde todas as seções inicialmente
+    // Esconde tudo inicialmente
     if (sectionAprendiz) sectionAprendiz.style.display = "none";
     if (sectionGestor) sectionGestor.style.display = "none";
     if (acessoNegado) acessoNegado.style.display = "none";
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     setupModal();
 
-    // ==================== CONTROLE DE ACESSO ====================
     if (tipoUsuario === 'gestor') {
         if (sectionGestor) sectionGestor.style.display = "block";
         await carregarPainelGestor();
@@ -36,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
-// ====================== APRENDIZ - MINHAS TURMAS ======================
+// ====================== APRENDIZ ======================
 async function carregarMinhasTurmas(aprendizId) {
     try {
         const response = await fetch(`${API_URL}/minhas-turmas/${aprendizId}`);
@@ -48,31 +47,23 @@ async function carregarMinhasTurmas(aprendizId) {
         container.innerHTML = "";
 
         if (!turmas || turmas.length === 0) {
-            container.innerHTML = `
-                <p style="color:#aaa; text-align:center; padding:80px; font-size:1.1rem;">
-                    Você ainda não está matriculado em nenhuma turma.
-                </p>`;
+            container.innerHTML = `<p style="color:#aaa; text-align:center; padding:80px;">Você ainda não está matriculado em nenhuma turma.</p>`;
             return;
         }
 
         turmas.forEach(turma => {
             container.innerHTML += `
                 <div class="turma-card border-azul">
-                    <div class="turma-icon ico-azul">
-                        <i class="fa-solid fa-code"></i>
-                    </div>
+                    <div class="turma-icon ico-azul"><i class="fa-solid fa-code"></i></div>
                     <h3>${turma.nome}</h3>
                     <p>${turma.descricao || "Sem descrição"}</p>
-                    <button class="btn-turma btn-azul" 
-                            onclick="verAlunos(${turma.id}, '${turma.nome.replace(/'/g, "\\'")}')">
+                    <button class="btn-turma btn-azul" onclick="verAlunos(${turma.id}, '${turma.nome.replace(/'/g, "\\'")}')">
                         Acessar Turma
                     </button>
                 </div>`;
         });
     } catch (error) {
         console.error(error);
-        document.getElementById("listaMinhasTurmas").innerHTML = `
-            <p style="color:red; text-align:center;">Erro ao carregar suas turmas.</p>`;
     }
 }
 
@@ -80,6 +71,42 @@ async function carregarMinhasTurmas(aprendizId) {
 async function carregarPainelGestor() {
     await carregarTurmasGestor();
     await carregarListasVincular();
+    setupFormCriarTurma();   // ← ESSA LINHA ESTAVA FALTANDO!
+    await carregarTurmasParaTarefas();
+}
+
+function setupFormCriarTurma() {
+    const turmaForm = document.getElementById("turmaForm");
+
+    if (!turmaForm) return;
+
+    turmaForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const nome = document.getElementById("nomeTurma").value.trim();
+        const descricao = document.getElementById("descricaoTurma").value.trim();
+
+        if (!nome) return alert("O nome da turma é obrigatório!");
+
+        try {
+            const response = await fetch(`${API_URL}/criar-turma`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nome, descricao })
+            });
+
+            const data = await response.json();
+            alert(data.mensagem);
+
+            if (data.sucesso) {
+                turmaForm.reset();
+                await carregarTurmasGestor();   // Atualiza a lista
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao criar turma.");
+        }
+    });
 }
 
 async function carregarTurmasGestor() {
@@ -99,9 +126,7 @@ async function carregarTurmasGestor() {
         turmas.forEach(turma => {
             container.innerHTML += `
                 <div class="turma-card border-roxo">
-                    <div class="turma-icon ico-roxo">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
+                    <div class="turma-icon ico-roxo"><i class="fa-solid fa-users"></i></div>
                     <h3>${turma.nome}</h3>
                     <p>${turma.descricao || "Sem descrição"}</p>
                     <button class="btn-turma" onclick="verAlunos(${turma.id}, '${turma.nome.replace(/'/g, "\\'")}')">
@@ -129,15 +154,10 @@ async function carregarListasVincular() {
         if (listaTurmasEl) listaTurmasEl.innerHTML = "";
         if (listaAprendizesEl) listaAprendizesEl.innerHTML = "";
 
-        turmas.forEach(t => {
-            listaTurmasEl?.appendChild(criarItem(t.nome, t.id, "#listaTurmasVincular"));
-        });
-
-        aprendizes.forEach(a => {
-            listaAprendizesEl?.appendChild(criarItem(a.nome, a.id, "#listaAprendizesVincular"));
-        });
+        turmas.forEach(t => listaTurmasEl?.appendChild(criarItem(t.nome, t.id, "#listaTurmasVincular")));
+        aprendizes.forEach(a => listaAprendizesEl?.appendChild(criarItem(a.nome, a.id, "#listaAprendizesVincular")));
     } catch (error) {
-        console.error("Erro ao carregar listas de vinculação:", error);
+        console.error(error);
     }
 }
 
@@ -157,7 +177,7 @@ function criarItem(texto, id, container) {
     return div;
 }
 
-// Busca em tempo real
+// Busca
 document.getElementById("searchTurma")?.addEventListener("input", filtrarItens);
 document.getElementById("searchAprendiz")?.addEventListener("input", filtrarItens);
 
@@ -169,23 +189,17 @@ function filtrarItens(e) {
     });
 }
 
-// Botão Vincular
+// Vincular
 document.getElementById("btnVincular")?.addEventListener("click", async () => {
-    if (!turmaSelecionada || !aprendizSelecionado) {
-        return alert("❌ Selecione uma turma e um aprendiz");
-    }
+    if (!turmaSelecionada || !aprendizSelecionado) return alert("Selecione uma turma e um aprendiz");
 
     try {
-        const response = await fetch(`${API_URL}/atribuir-aprendiz`, {
+        const res = await fetch(`${API_URL}/atribuir-aprendiz`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                turma_id: Number(turmaSelecionada),
-                aprendiz_id: Number(aprendizSelecionado)
-            })
+            body: JSON.stringify({ turma_id: Number(turmaSelecionada), aprendiz_id: Number(aprendizSelecionado) })
         });
-
-        const data = await response.json();
+        const data = await res.json();
         alert(data.mensagem);
 
         if (data.sucesso) {
@@ -193,9 +207,8 @@ document.getElementById("btnVincular")?.addEventListener("click", async () => {
             aprendizSelecionado = null;
             document.querySelectorAll(".item").forEach(i => i.classList.remove("selecionado"));
         }
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao vincular aprendiz");
+    } catch (e) {
+        alert("Erro ao vincular");
     }
 });
 
@@ -205,19 +218,17 @@ function setupModal() {
     if (!modal) return;
 
     const closeBtn = document.querySelector(".close-modal");
-    if (closeBtn) {
-        closeBtn.addEventListener("click", () => modal.style.display = "none");
-    }
+    if (closeBtn) closeBtn.addEventListener("click", () => modal.style.display = "none");
 
-    modal.addEventListener("click", (e) => {
+    modal.addEventListener("click", e => {
         if (e.target === modal) modal.style.display = "none";
     });
 }
 
 window.verAlunos = async function (turmaId, nomeTurma) {
     try {
-        const response = await fetch(`${API_URL}/alunos-turma/${turmaId}`);
-        const alunos = await response.json();
+        const res = await fetch(`${API_URL}/alunos-turma/${turmaId}`);
+        const alunos = await res.json();
 
         const modal = document.getElementById("modalAlunos");
         const title = document.getElementById("modalTurmaNome");
@@ -226,21 +237,68 @@ window.verAlunos = async function (turmaId, nomeTurma) {
         title.textContent = `Alunos da Turma: ${nomeTurma}`;
         lista.innerHTML = "";
 
-        if (!alunos || alunos.length === 0) {
+        if (!alunos?.length) {
             lista.innerHTML = `<p style="text-align:center;color:#aaa;padding:40px;">Nenhum aluno vinculado ainda.</p>`;
         } else {
             alunos.forEach(aluno => {
-                lista.innerHTML += `
-                    <div class="aluno-item">
-                        <strong>${aluno.nome}</strong><br>
-                        <small>${aluno.email || 'Sem email'}</small>
-                    </div>`;
+                lista.innerHTML += `<div class="aluno-item"><strong>${aluno.nome}</strong><br><small>${aluno.email || 'Sem email'}</small></div>`;
             });
         }
 
         modal.style.display = "flex";
+    } catch (e) {
+        alert("Erro ao carregar alunos");
+    }
+};// ====================== TAREFAS ======================
+
+async function carregarTurmasParaTarefas() {
+    const select = document.getElementById("selectTurmaTarefa");
+    if (!select) return;
+
+    try {
+        const turmas = await (await fetch(`${API_URL}/listar-turmas`)).json();
+        select.innerHTML = '<option value="">Selecione uma turma</option>';
+
+        turmas.forEach(turma => {
+            select.innerHTML += `<option value="${turma.id}">${turma.nome}</option>`;
+        });
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+// Criar Tarefa
+document.getElementById("btnCriarTarefa")?.addEventListener("click", async () => {
+    const titulo = document.getElementById("tituloTarefa").value.trim();
+    const descricao = document.getElementById("descricaoTarefa").value.trim();
+    const turmaId = document.getElementById("selectTurmaTarefa").value;
+
+    if (!titulo || !turmaId) {
+        return alert("Título e Turma são obrigatórios!");
+    }
+
+    try {
+        const response = await fetch(`${API_URL}/criar-tarefa`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                titulo,
+                descricao,
+                turma_id: Number(turmaId)
+            })
+        });
+
+        const data = await response.json();
+        alert(data.mensagem);
+
+        if (data.sucesso) {
+            // Limpa formulário
+            document.getElementById("tituloTarefa").value = "";
+            document.getElementById("descricaoTarefa").value = "";
+        }
     } catch (error) {
         console.error(error);
-        alert("Erro ao carregar alunos da turma.");
+        alert("Erro ao criar tarefa");
     }
-};
+});
+

@@ -104,7 +104,25 @@
                         </div>
                         <button id="btnVincular" class="btn-vincular">
                             <i class="fa-solid fa-link"></i> Vincular Aprendiz
-                        </button>
+                        </button>       
+                           <div class="tarefa-section">
+                                <h3>Criar Nova Tarefa</h3>
+                                <div class="tarefa-form">
+                                    <input type="text" id="tituloTarefa" placeholder="Título da tarefa">
+                                    <textarea id="descricaoTarefa" placeholder="Descrição da tarefa"></textarea>
+                                    <select id="selectTurmaTarefa">
+                                        <option value="">Selecione uma turma</option>
+                                    </select>
+                                    
+                                    <button id="btnCriarTarefa" class="btn-criar-tarefa">
+                                        <i class="fa-solid fa-plus"></i> Criar Tarefa
+                                    </button>
+                                </div>
+
+                                <h3 style="margin-top: 30px; text-align:center;">Tarefas Criadas</h3>
+                                <div id="listaTarefas" class="lista-tarefas"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -65,3 +65,8 @@ ON DUPLICATE KEY UPDATE segundos_totais = segundos_totais;
 -- ============================================
 SHOW TABLES;
 SELECT * FROM tempo_trabalho;
+
+
+DELETE FROM usuarios
+WHERE id = 3;
+

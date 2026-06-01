@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .app-background {
     min-height: 100vh;
     background-image: url('../img/backgrounds/backgrounds.jpeg');
@@ -5,7 +11,7 @@
     background-position: center;
     background-attachment: fixed;
     padding: 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
 }
@@ -24,7 +30,7 @@
     left: 20px;
     z-index: 1000;
     background: #0056ff;
-    color: white;
+    color: #fff;
     border: none;
     padding: 10px 15px;
     border-radius: 8px;
@@ -32,7 +38,6 @@
     font-size: 1.2rem;
 }
 
-/* SIDEBAR PADRONIZADA */
 .sidebar {
     width: 100px;
     background: rgba(20, 25, 40, 0.4);
@@ -43,7 +48,6 @@
     flex-direction: column;
     align-items: center;
     padding: 30px 0;
-    transition: transform 0.3s ease;
     min-height: 95vh;
 }
 
@@ -54,7 +58,7 @@
 .profile-icon {
     width: 50px;
     height: 50px;
-    background-color: #ffffff;
+    background: #fff;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -62,12 +66,12 @@
     font-size: 1.5rem;
     color: #1a2733;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .profile-icon:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(255,255,255,0.3);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 
 .sidebar-nav {
@@ -85,8 +89,8 @@
     text-decoration: none;
     font-size: 0.7rem;
     gap: 8px;
-    transition: all 0.3s ease;
     padding: 8px 0;
+    transition: 0.3s;
 }
 
 .nav-item i {
@@ -95,7 +99,7 @@
 
 .nav-item:hover,
 .nav-item.active {
-    color: #ffffff;
+    color: #fff;
     transform: translateY(-2px);
 }
 
@@ -103,7 +107,6 @@
     margin-top: auto;
 }
 
-/* MAIN CONTENT */
 .main-content {
     flex: 1;
     display: flex;
@@ -112,9 +115,6 @@
 }
 
 .top-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: #0b111e;
     padding: 15px 25px;
     border-radius: 12px;
@@ -137,11 +137,10 @@
     font-size: 0.9rem;
 }
 
-/* CONTAINER DAS TURMAS */
 .turmas-container {
     background: rgba(30, 30, 40, 0.5);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
     padding: 30px;
 }
@@ -151,7 +150,7 @@
 }
 
 .turmas-header h2 {
-    color: white;
+    color: #fff;
     font-size: 1.8rem;
     margin-bottom: 5px;
 }
@@ -168,7 +167,6 @@
     color: #b388ff;
 }
 
-/* GRID DE TURMAS */
 .grid-turmas {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -177,17 +175,17 @@
 }
 
 .turma-card {
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     padding: 20px;
-    color: white;
-    transition: all 0.3s ease;
+    color: #fff;
+    transition: 0.3s;
     cursor: pointer;
 }
 
 .turma-card:hover {
     transform: translateY(-5px);
-    background: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.12);
 }
 
 .border-azul {
@@ -199,13 +197,10 @@
     height: 50px;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     margin-bottom: 15px;
-}
-
-.ico-azul {
-    background: rgba(61,169,252,0.2);
+    background: rgba(61, 169, 252, 0.2);
     color: #3da9fc;
 }
 
@@ -215,10 +210,7 @@
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.8rem;
-}
-
-.tag-azul {
-    background: rgba(61,169,252,0.2);
+    background: rgba(61, 169, 252, 0.2);
     color: #3da9fc;
 }
 
@@ -240,26 +232,22 @@
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s ease;
-}
-
-.btn-azul {
+    transition: 0.3s;
     background: #3da9fc;
-    color: white;
+    color: #fff;
 }
 
-.btn-azul:hover {
+.btn-turma:hover {
     background: #2b8fd9;
 }
 
-/* FORMULÁRIO CRIAR TURMA */
 .turma-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
     margin-bottom: 30px;
     padding: 20px;
-    background: rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
 }
 
@@ -269,20 +257,19 @@
     padding: 12px;
     border: none;
     border-radius: 8px;
-    background: rgba(255,255,255,0.9);
-    outline: none;
+    background: rgba(255, 255, 255, 0.9);
     font-size: 1rem;
 }
 
 .btn-criar {
     background: linear-gradient(135deg, #7c4dff, #b388ff);
-    color: white;
+    color: #fff;
     border: none;
     padding: 12px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .btn-criar:hover {
@@ -290,18 +277,17 @@
     box-shadow: 0 5px 15px rgba(124, 77, 255, 0.3);
 }
 
-/* VINCULAR APRENDIZ */
 .vincular-section {
     background: rgba(30, 30, 45, 0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     padding: 25px;
     margin-top: 35px;
 }
 
 .vincular-section h3 {
-    color: white;
+    color: #fff;
     margin-bottom: 20px;
     text-align: center;
 }
@@ -326,26 +312,20 @@
 .search-input {
     width: 100%;
     padding: 12px 16px;
-    border: none;
-    border-radius: 10px;
-    background: rgba(255,255,255,0.1);
-    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
     margin-bottom: 12px;
-    outline: none;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.search-input::placeholder {
-    color: #888;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
 }
 
 .lista-seletor {
-    background: rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.06);
     border-radius: 10px;
     max-height: 320px;
     overflow-y: auto;
     padding: 8px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .lista-seletor .item {
@@ -353,8 +333,7 @@
     border-radius: 8px;
     margin: 4px 0;
     cursor: pointer;
-    transition: all 0.2s;
-    color: white;
+    color: #fff;
 }
 
 .lista-seletor .item:hover {
@@ -372,13 +351,12 @@
     width: 100%;
     padding: 14px;
     background: linear-gradient(135deg, #7c4dff, #b388ff);
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 10px;
-    font-size: 1.05rem;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: 0.3s;
 }
 
 .btn-vincular:hover {
@@ -386,14 +364,13 @@
     box-shadow: 0 10px 20px rgba(124, 77, 255, 0.4);
 }
 
-/* ACESSO NEGADO */
 .acesso-negado {
     text-align: center;
     padding: 50px;
 }
 
 .acesso-negado h2 {
-    color: white;
+    color: #fff;
     margin-bottom: 15px;
 }
 
@@ -402,7 +379,6 @@
     margin-bottom: 20px;
 }
 
-/* MODAL */
 .modal {
     position: fixed;
     top: 0;
@@ -431,10 +407,10 @@
 
 .modal-content h3 {
     margin: 0;
-    padding: 25px 25px 15px;
-    color: white;
+    padding: 25px;
+    color: #fff;
     font-size: 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .close-modal {
@@ -444,16 +420,14 @@
     font-size: 32px;
     color: #aaa;
     cursor: pointer;
-    transition: all 0.2s;
 }
 
 .close-modal:hover {
     color: #ff6b6b;
-    transform: scale(1.1);
 }
 
 .alunos-list {
-    padding: 15px 25px 25px;
+    padding: 20px 25px;
     max-height: 55vh;
     overflow-y: auto;
     display: flex;
@@ -466,17 +440,10 @@
     border-radius: 12px;
     padding: 16px 18px;
     border-left: 4px solid #b388ff;
-    transition: all 0.2s;
-}
-
-.aluno-item:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateX(5px);
 }
 
 .aluno-item strong {
-    color: white;
-    font-size: 1.05rem;
+    color: #fff;
 }
 
 .aluno-item small {
@@ -485,28 +452,137 @@
     margin-top: 4px;
 }
 
-/* SCROLLBAR */
-.alunos-list::-webkit-scrollbar,
-.lista-seletor::-webkit-scrollbar {
+.tarefa-section {
+    background: rgba(30, 30, 45, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: 35px;
+}
+
+.tarefa-section h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.tarefa-form {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1.5fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.tarefa-form input,
+.tarefa-form textarea,
+.tarefa-form select {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+}
+
+.tarefa-form textarea {
+    grid-column: span 2;
+    min-height: 80px;
+    resize: vertical;
+}
+
+.btn-criar-tarefa {
+    grid-column: span 3;
+    padding: 14px;
+    background: linear-gradient(135deg, #7c4dff, #b388ff);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-criar-tarefa:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(124, 77, 255, 0.4);
+}
+
+.lista-tarefas {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tarefa-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    border-left: 5px solid #7c4dff;
+    transition: 0.3s;
+}
+
+.tarefa-card:hover {
+    transform: translateX(8px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.tarefa-card h4 {
+    margin: 0 0 8px;
+    color: #fff;
+}
+
+.tarefa-card p {
+    color: #b0b0c0;
+    margin: 0 0 12px;
+    font-size: 0.9rem;
+}
+
+.tarefa-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.tarefa-turma {
+    background: rgba(124, 77, 255, 0.2);
+    color: #b388ff;
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.status-pendente {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+.status-concluida {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+::-webkit-scrollbar {
     width: 6px;
 }
 
-.alunos-list::-webkit-scrollbar-thumb,
-.lista-seletor::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: rgba(179, 136, 255, 0.5);
     border-radius: 20px;
 }
 
-/* RESPONSIVIDADE */
 @media (max-width: 1024px) {
     .dashboard-layout {
         flex-direction: column;
     }
-    
     .menu-toggle {
         display: block;
     }
-    
     .sidebar {
         position: fixed;
         left: -150px;
@@ -514,20 +590,16 @@
         height: 100vh;
         z-index: 999;
         border-radius: 0 30px 30px 0;
-        transition: left 0.3s ease;
+        transition: left 0.3s;
     }
-    
     .sidebar.active {
         left: 0;
     }
-    
     .main-content {
         margin-top: 50px;
     }
-    
     .vincular-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
     }
 }
 

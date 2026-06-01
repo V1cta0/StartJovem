@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loginGestorForm.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const senha = document.getElementById('senha').value;
 
             try {
@@ -21,18 +21,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (data.sucesso) {
-                    // PADRONIZAÇÃO: sempre salvar como 'usuario'
-                    localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                    const usuario = data.usuario;
+
+                    // ✅ PROTEÇÃO FORTE: Só permite login se for realmente GESTOR
+                    if (usuario.tipo !== 'gestor') {
+                        alert('Este login é apenas para Gestores.');
+                        return;
+                    }
+
+                    // Salva as informações
+                    localStorage.setItem('usuario', JSON.stringify(usuario));
                     localStorage.setItem('tipoUsuario', 'gestor');
 
                     alert(data.mensagem || 'Login realizado com sucesso!');
-                    window.location.href = 'turmas.html'; // ou dashboardGestor.html
+                    window.location.href = 'turmas.html';
                 } else {
-                    alert(data.mensagem || 'Email ou senha incorretos');
+                    alert(data.mensagem || 'Email ou senha incorretos.');
                 }
             } catch (error) {
                 console.error(error);
-                alert('Erro ao realizar login');
+                alert('Erro ao realizar login.');
             }
         });
     }
